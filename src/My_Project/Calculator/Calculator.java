@@ -48,49 +48,49 @@ private void getToken() throws Errors {   // meth for next token
  expldx++;
  if (expldx >= exp.length()) { break; }
  } tokType = digital;   
-	}
-	}
+ }
+ }
 double eval(String str) throws Errors { // pars start
-	double result ;
-	exp = str;   
-	 expldx = 0;  
-	 getToken(); 
-	 if (token.equals("\0")) {
+ double result ;
+ exp = str;   
+ expldx = 0;  
+ getToken(); 
+ if (token.equals("\0")) {
  control(2);
  }
-	 result = step1();  
-	 if (token.equals("\0")) {
+ result = step1();  
+ if (token.equals("\0")) {
  control(0);
  }
-	 return result;  
-	}
-private double step1() throws Errors {  // meth for "+" and "-" operation
-	double result; 
-	double localresult; 
-				 result = step2();   // next rekursive action
-	char ch;   
-	while ((ch = token.charAt(0)) == '+' || ch == '-') {
-		getToken(); 
-		localresult = step2();
-		 switch (ch){
-		 case '-' :result = result - localresult;
-		 break;
-		 case '+': result = result + localresult;
-		 break;
-		 default : break;
-		  }
-		}
-	return result;
-}
-private double step2() throws Errors {  // meth for "/" and "*"
-	 double result; 
-	 double localresult; 
-	result = stepunary();  
-	char ch;
-	while ((ch = token.charAt(0)) == '*' || ch == '/') {
-		getToken(); 
-		localresult = stepunary();
-	 	 switch(ch) {
+ return result;  
+ }
+ private double step1() throws Errors {  // meth for "+" and "-" operation
+ double result; 
+ double localresult; 
+ result = step2();   // next rekursive action
+ char ch;   
+ while ((ch = token.charAt(0)) == '+' || ch == '-') {
+ getToken(); 
+ localresult = step2();
+ switch (ch){
+ case '-' :result = result - localresult;
+ break;
+ case '+': result = result + localresult;
+ break;
+ default : break;
+ }
+ }
+ return result;
+ }
+ private double step2() throws Errors {  // meth for "/" and "*"
+ double result; 
+ double localresult; 
+ result = stepunary();  
+ char ch;
+ while ((ch = token.charAt(0)) == '*' || ch == '/') {
+ getToken(); 
+ localresult = stepunary();
+ switch(ch) {
  case '*' : result = result * localresult;
  break;
  case '/' : if (localresult == 0) { control(1); }
@@ -99,35 +99,34 @@ private double step2() throws Errors {  // meth for "/" and "*"
  default : break;
  }
 }
-	return result;
+ return result;
 }
 private double stepunary() throws Errors { // check, was "-" unary or binary
-	 
-	double result; 
-	String operation;
-	operation = "";
-	if ((tokType == literal) && token.equals("+") || token.equals("-")) {
-	operation = token;
-	getToken() ;
+ double result; 
+ String operation;
+ operation = "";
+ if ((tokType == literal) && token.equals("+") || token.equals("-")) {
+ operation = token;
+ getToken() ;
  }
  result = skobki();
-	if (operation.equals("-")) { result = -result; }
-	return result;
-	}
+ if (operation.equals("-")) { result = -result; }
+ return result;
+ }
 private double skobki() throws Errors {
  double result;
-	if (token.equals("(")) {
+ if (token.equals("(")) {
  getToken();
-		result = step1();
-		if (!token.equals(")")) {
+ result = step1();
+ if (!token.equals(")")) {
  control(3);
  }
-		getToken();
-		} else { result = prost();
- 	}
-	return result ;
+ getToken();
+ } else { result = prost();
+ }
+ return result ;
 }
-private double prost() throws Errors { // get digital 
+ private double prost() throws Errors { // get digital 
  double result = 0.0;
  switch (tokType) {
  case 2:
@@ -150,11 +149,11 @@ return (" ()+-*/".indexOf(c) != -1);
  }
 class Calculator {  //class Calculator 
  public static void main(String [] args) {
-		//System.out.println(">>Enter String>> : ->");
-		//Scanner sc= new Scanner(System.in);
+ //System.out.println(">>Enter String>> : ->");
+ //Scanner sc= new Scanner(System.in);
  try {
  String a = args[0].toString();
-	//String a= sc.next();
+ //String a= sc.next();
  Parser myparser = new Parser();
  try {
  double checksumm = myparser.eval(a);  
