@@ -1,4 +1,4 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.Calculator
+package ru.fizteh.fivt.students.AndrewTimokhin.Calculator;
 
 import java.util.*;
 
