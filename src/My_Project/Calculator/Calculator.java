@@ -6,8 +6,9 @@ import java.util.*;
 
 //class Parser have all logical structure by algorithm
 
- class Errors extends Exception {
-String errmsg;
+final class Errors extends Exception {
+ private static final long serialVersionUID = 666;
+ String errmsg;
  Errors(String msg) { errmsg = msg;} ;
  public String toString() {
  return errmsg;
@@ -48,8 +49,7 @@ private void getToken() throws Errors {   // meth for next token
  while ((!check(exp.charAt(expldx)))) {  
  token += exp.charAt(expldx); 
  expldx++;
- if (expldx >= exp.length()) {break;}
-		 
+ if (expldx >= exp.length()) {break; }
  } tokType = digital;   
 	}
 	}
@@ -60,10 +60,10 @@ double eval(String str) throws Errors { // pars start
 	 expldx = 0;  
 	 getToken(); 
 	 if (token.equals("\0"))
-		 {control(2);}
+		 { control(2); }
 	 result = step1();  
 	 if (token.equals("\0"))
-		 {control(0);}
+		 { control(0); }
 	 return result;  
 	}
 	
@@ -98,7 +98,7 @@ private double step2() throws Errors {  // meth for "/" and "*"
 	 	 switch(ch) {
  case '*' : result = result * localresult;
  break;
- case '/' : if (localresult == 0) {control(1);}
+ case '/' : if (localresult == 0) { control(1); }
  result = result / localresult;
  break;
  default : break;
@@ -112,10 +112,11 @@ private double stepunary() throws Errors { // check, was "-" unary or binary
 	String operation;
 	operation = "";
 	if ((tokType == literal) && token.equals("+") || token.equals("-")) {
-	operation = token ;
-	getToken();};
+	operation = token;
+	getToken() ;
+	};
  result = skobki();
-	if (operation.equals("-")) {result = -result;}
+	if (operation.equals("-")) { result = -result;}
 	return result;
 	
 	}
@@ -128,7 +129,7 @@ private double skobki() throws Errors {
 		getToken();
 		result = step1();
 		if (!token.equals(")"))
-			control(3);
+			{control(3);}
 		getToken();
 		} else { result = prost();
  	}
@@ -141,7 +142,7 @@ private double prost() throws Errors { // get digital
  case 2:
  try {
  result = Double.parseDouble(token);
- } catch(NumberFormatException e) {
+ } catch (NumberFormatException e) {
  control(0);
  }
  getToken();
@@ -154,10 +155,7 @@ private double prost() throws Errors { // get digital
  }
 
  private boolean check(char c) throws Errors {
-if (" ()+-*/".indexOf(c) != -1) 
-	return true; 
-else
-	return false; 
+return (" ()+-*/".indexOf(c) != -1);
  }  
  }
 
@@ -174,11 +172,11 @@ else
  try {
  double checksumm = myparser.eval(a);  
  System.out.println(checksumm) ;
- } catch(Errors err) {
+ } catch (Errors err) {
  System.out.println(err);
  }
 		 //sc.close();
- } 	catch(ArrayIndexOutOfBoundsException e) {
+ } catch (ArrayIndexOutOfBoundsException e) {
  System.out.println("An error was detected : " + e);
  }
 	 
