@@ -6,13 +6,13 @@ import java.util.*;
 
 //class Parser have all logical structure by algorithm
 
-final class Errors extends Exception {
+class Errors extends Exception {
  private static final long serialVersionUID = 666;
  String errmsg;
- Errors(String msg) { errmsg = msg;} ;
+ Errors(String msg) { errmsg = msg; } ;
  public String toString() {
  return errmsg;
-	}
+ }
 }
  class Parser {  
  final int sinerror = 0; // error code
@@ -49,7 +49,7 @@ private void getToken() throws Errors {   // meth for next token
  while ((!check(exp.charAt(expldx)))) {  
  token += exp.charAt(expldx); 
  expldx++;
- if (expldx >= exp.length()) {break; }
+ if (expldx >= exp.length()) { break; }
  } tokType = digital;   
 	}
 	}
@@ -59,11 +59,11 @@ double eval(String str) throws Errors { // pars start
 	exp = str;   
 	 expldx = 0;  
 	 getToken(); 
-	 if (token.equals("\0"))
-		 { control(2); }
+	 if (token.equals("\0")) {
+ control(2); }
 	 result = step1();  
-	 if (token.equals("\0"))
-		 { control(0); }
+	 if (token.equals("\0")) {
+ control(0); }
 	 return result;  
 	}
 	
@@ -114,9 +114,9 @@ private double stepunary() throws Errors { // check, was "-" unary or binary
 	if ((tokType == literal) && token.equals("+") || token.equals("-")) {
 	operation = token;
 	getToken() ;
-	};
+ }
  result = skobki();
-	if (operation.equals("-")) { result = -result;}
+	if (operation.equals("-")) { result = -result; }
 	return result;
 	
 	}
@@ -128,8 +128,8 @@ private double skobki() throws Errors {
 
 		getToken();
 		result = step1();
-		if (!token.equals(")"))
-			{control(3);}
+		if (!token.equals(")")) {
+ control(3); }
 		getToken();
 		} else { result = prost();
  	}
