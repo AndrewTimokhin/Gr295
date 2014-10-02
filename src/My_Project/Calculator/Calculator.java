@@ -123,11 +123,12 @@ private double stepunary() throws Errors { // check, was "-" unary or binary
 private double skobki() throws Errors {
 	 
 	double result;
-	if (token.equals ("(")) {
+	if (token.equals("(")) {
 
 		getToken();
 		result = step1();
-		if (!token.equals(")"))control (3);
+		if (!token.equals(")"))
+			control(3);
 		getToken();
 		} else { result = prost();
  	}
@@ -153,9 +154,10 @@ private double prost() throws Errors { // get digital
  }
 
  private boolean check(char c) throws Errors {
- if (" ()+-*/".indexOf(c) != -1)
- return true;
- else return false; 
+if (" ()+-*/".indexOf(c) != -1) 
+	return true; 
+else
+	return false; 
  }  
  }
 
@@ -171,12 +173,12 @@ private double prost() throws Errors { // get digital
  Parser myparser = new Parser();
  try {
  double checksumm = myparser.eval(a);  
- System.out.println(checksumm);}   
- catch(Errors err) {
+ System.out.println(checksumm) ;
+ } catch(Errors err) {
  System.out.println(err);
  }
 		 //sc.close();
- } 	catch (ArrayIndexOutOfBoundsException e) {
+ } 	catch(ArrayIndexOutOfBoundsException e) {
  System.out.println("An error was detected : " + e);
  }
 	 
