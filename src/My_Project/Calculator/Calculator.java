@@ -76,7 +76,7 @@ double eval(String str) throws Errors { // pars start
  control(2);
  }
  result = step1();  
- if (token.equals("\0")) {
+ if (!token.equals("\0")) {
  control(0);
  }
  return result;  
