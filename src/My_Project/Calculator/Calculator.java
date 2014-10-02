@@ -156,9 +156,8 @@ private double prost() throws Errors { // get digital
 
 private boolean check(char c) throws Errors {
 if (" ()+-*/".indexOf(c) != -1)
-	
-	return true;
-else {return false;};
+return true;
+else return false; 
 }  
 }
 
