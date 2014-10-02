@@ -6,23 +6,23 @@ import java.util.*;
 
 //class Parser have all logical structure by algorithm
 class Calculator {  //class Calculator 
-	 public static void main(String [] args) {
-	 //System.out.println(">>Enter String>> : ->");
-	 //Scanner sc= new Scanner(System.in);
-	 try {
-	 String a = args[0].toString();
-	 //String a= sc.next();
-	 Parser myparser = new Parser();
-	 try {
-	 double checksumm = myparser.eval(a);  
-	 System.out.println(checksumm) ;
-	 } catch (Errors err) {
-	 System.out.println(err);
-	 } 
-	 } catch (ArrayIndexOutOfBoundsException e) {
-	 System.out.println("An error was detected : " + e);
-	 }
-	} }
+ public static void main(String [] args) {
+ //System.out.println(">>Enter String>> : ->");
+ //Scanner sc= new Scanner(System.in);
+ try {
+ String a = args[0].toString();
+ //String a= sc.next();
+ Parser myparser = new Parser();
+ try {
+ double checksumm = myparser.eval(a);  
+ System.out.println(checksumm) ;
+ } catch (Errors err) {
+ System.out.println(err);
+ } 
+ } catch (ArrayIndexOutOfBoundsException e) {
+ System.out.println("An error was detected : " + e);
+ }
+ } }
 class Errors extends Exception {
  private static final long serialVersionUID = 666;
  String errmsg;
