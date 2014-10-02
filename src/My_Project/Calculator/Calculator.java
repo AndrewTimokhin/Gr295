@@ -9,7 +9,7 @@ import java.util.*;
  class Errors extends Exception {
 String errmsg;
 	Errors(String msg) { errmsg = msg;};
-	public String toString ( ) {
+	public String toString() {
 		return errmsg;
 	}
 }
@@ -45,7 +45,7 @@ private void getToken() throws Errors {   // meth for next token
 		expldx++;  
 		tokType = literal;  
  
-	} else if (Character.isDigit(exp.charAt(expldx))){
+	} else if (Character.isDigit(exp.charAt(expldx))) {
 		while ((!check(exp.charAt(expldx)))) {  
 		token += exp.charAt(expldx); 
 		expldx++;
@@ -60,71 +60,78 @@ double eval(String str) throws Errors { // pars start
 	exp = str;   
 	 expldx = 0;  
 	 getToken(); 
-	 if (token == "\0")
+	 if (token.equals("\0"))
 		 control(2);
-	 result = Step1();  
-	 if (token != "\0")
+	 result = step1();  
+	 if (token.equals("\0"))
 		 control(0);
 	 return result;  
 	}
 	
-private double Step1 () throws Errors {  // meth for "+" and "-" operation
-	double result; double localresult; 
-				 result= Step2( );   // next rekursive action
+private double step1() throws Errors {  // meth for "+" and "-" operation
+	double result; 
+	double localresult; 
+				 result = step2();   // next rekursive action
 	char ch;   
-	while ((ch=token.charAt(0)) == '+' || ch == '-') {
-		getToken (); localresult=Step2();
+	while ((ch = token.charAt(0)) == '+' || ch == '-') {
+		getToken(); 
+		localresult = step2();
 		 switch (ch){
-		 case '-' :result = result-localresult;
+		 case '-' :result = result - localresult;
 		 break;
-		 case '+': result = result+localresult;
+		 case '+': result = result + localresult;
 		 break;
+		 default : break;
 		  }
 		}
 	return result;
 }
 
 
-private double Step2 () throws Errors {  // meth for "/" and "*"
-	 double result; double localresult; 
-	result = StepUnary( );  
+private double step2() throws Errors {  // meth for "/" and "*"
+	 double result; 
+	 double localresult; 
+	result = stepunary();  
 	char ch;
-	while ((ch=token.charAt(0))=='*' || ch=='/') {
-		getToken(); localresult = StepUnary();
+	while ((ch = token.charAt(0)) == '*' || ch=='/') {
+		getToken(); 
+		localresult = stepunary();
 	 	 switch(ch) {
- case '*': result = result*localresult;
+ case '*' : result = result * localresult;
  break;
- case '/' : if (localresult == 0) control(1); result = result/localresult;
+ case '/' : if (localresult == 0) control(1); 
+ result = result / localresult;
  break;
+ default : break;
  }
 }
 	return result;
 }
-private double StepUnary() throws Errors { // check, was "-" unary or binary
+private double stepunary() throws Errors { // check, was "-" unary or binary
 	 
 	double result; 
 	String operation;
 	operation = "";
-	if ((tokType == literal) && token.equals("+")|| token.equals("-")) {
-	operation=token;getToken();};
-
- 
-	result = Skobki();
+	if ((tokType == literal) && token.equals("+") || token.equals("-")) {
+	operation = token ;
+	getToken();
+ };
+ result = skobki();
 	if (operation.equals("-")) result = -result;
 	return result;
 	
 	}
 	
-private double Skobki() throws Errors {
+private double skobki() throws Errors {
 	 
 	double result;
-	if (token.equals ("(")) 
-	{
+	if (token.equals ("(")) {
+
 		getToken();
-		result = Step1( );
-		if (!token.equals(")") )control (3);
+		result = step1( );
+		if (!token.equals(")"))control (3);
 		getToken();
-		} else {result= prost();
+		} else { result = prost();
  	}
 	return result ;
 }
@@ -148,17 +155,17 @@ private double prost() throws Errors { // get digital
 }
 
 private boolean check(char c) throws Errors {
-if (" ()+-*/".indexOf(c) != -1)	  
+if (" ()+-*/".indexOf(c) != -1)
 	
-	return true; else return false;
-}
+	return true;
+else {return false;};
+}  
 }
 
 //class Calculator 
- class Calculator
-{
+ class Calculator {
  
-	public static void main (String [] args) {
+	public static void main(String [] args) {
 		//System.out.println(">>Enter String>> : ->");
 		//Scanner sc= new Scanner(System.in);
 		try {
@@ -167,15 +174,14 @@ if (" ()+-*/".indexOf(c) != -1)
 			Parser myparser = new Parser();
 		try {
 	double checksumm = myparser.eval(a);  
-	System.out.println(checksumm); }
+	System.out.println(checksumm);}
 		catch(Errors err) {
 			System.out.println(err);
 		}
 		
 		 //sc.close();
 		} 	catch (ArrayIndexOutOfBoundsException e) {
-		System.out.println("An error was detected : " +e);
+		System.out.println("An error was detected : " + e);
 	}
 	 
 }  }
- 
