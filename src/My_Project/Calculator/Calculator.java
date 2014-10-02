@@ -19,16 +19,13 @@ class Errors extends Exception {
  final int dividedbyzero = 1;
  final int emptyerror = 2;
  final int ubskobkierror = 3;
-		
  final int unknow = 0;  //type token
  final int literal = 1;
  final int digital = 2;
-		
  private String exp;  //parsing source
  private String token;  
  private int expldx;  
  private int tokType;  
-	
 private void control(int errorcode) throws Errors  //generate exception by code error
 {
 String []msg = {">>Syntax error : code 0", ">>Divide by Zero : code 1", ">>>Empty : code 2", ">>UB() : code 3"};
@@ -53,20 +50,20 @@ private void getToken() throws Errors {   // meth for next token
  } tokType = digital;   
 	}
 	}
-
 double eval(String str) throws Errors { // pars start
 	double result ;
 	exp = str;   
 	 expldx = 0;  
 	 getToken(); 
 	 if (token.equals("\0")) {
- control(2); }
+ control(2);
+ }
 	 result = step1();  
 	 if (token.equals("\0")) {
- control(0); }
+ control(0);
+ }
 	 return result;  
 	}
-	
 private double step1() throws Errors {  // meth for "+" and "-" operation
 	double result; 
 	double localresult; 
@@ -85,8 +82,6 @@ private double step1() throws Errors {  // meth for "+" and "-" operation
 		}
 	return result;
 }
-
-
 private double step2() throws Errors {  // meth for "/" and "*"
 	 double result; 
 	 double localresult; 
@@ -118,24 +113,20 @@ private double stepunary() throws Errors { // check, was "-" unary or binary
  result = skobki();
 	if (operation.equals("-")) { result = -result; }
 	return result;
-	
 	}
-	
 private double skobki() throws Errors {
-	 
-	double result;
+ double result;
 	if (token.equals("(")) {
-
-		getToken();
+ getToken();
 		result = step1();
 		if (!token.equals(")")) {
- control(3); }
+ control(3);
+ }
 		getToken();
 		} else { result = prost();
  	}
 	return result ;
 }
-
 private double prost() throws Errors { // get digital 
  double result = 0.0;
  switch (tokType) {
@@ -153,15 +144,11 @@ private double prost() throws Errors { // get digital
  }
  return result; 
  }
-
  private boolean check(char c) throws Errors {
 return (" ()+-*/".indexOf(c) != -1);
  }  
  }
-
-//class Calculator 
- class Calculator {
- 
+class Calculator {  //class Calculator 
  public static void main(String [] args) {
 		//System.out.println(">>Enter String>> : ->");
 		//Scanner sc= new Scanner(System.in);
@@ -174,10 +161,8 @@ return (" ()+-*/".indexOf(c) != -1);
  System.out.println(checksumm) ;
  } catch (Errors err) {
  System.out.println(err);
- }
-		 //sc.close();
+ } 
  } catch (ArrayIndexOutOfBoundsException e) {
  System.out.println("An error was detected : " + e);
  }
-	 
 } }
