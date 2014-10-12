@@ -26,8 +26,7 @@ class ModeWork {
 			return -1;
 			default: return -1;
 		}
-		return 1;
-	}
+		}
 	
 	void usermode() {
 		Functional func = new Functional(map);
