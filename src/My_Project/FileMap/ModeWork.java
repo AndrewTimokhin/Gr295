@@ -4,11 +4,10 @@ import java.util.*;
 
 class ModeWork {
 	private HashMap<String, String> map;
-
 	public ModeWork(HashMap<String, String> time) {
 		map = time;
 	}
-
+	
 	int stepmode(String[] array, Functional f, int index) {
 		switch (array[0 + index]) {
 		case "put":
@@ -28,7 +27,7 @@ class ModeWork {
 		}
 		return 1;
 	}
-
+	
 	void usermode() {
 		Functional func = new Functional(map);
 		String str = new String();
@@ -43,7 +42,7 @@ class ModeWork {
 		}
 
 	}
-
+	
 	void consol(String[] mass) {
 		Functional func = new Functional(map);
 		String str = new String();
