@@ -34,21 +34,21 @@ class ModeWork {
 	{   System.out.print("$ ");
 		str = rd.nextLine().toString();
 		mass = str.trim().split(" ");
-		if (stepmode(mass,func,0)==-1) break	;	
+		if (stepmode(mass,func,0) == -1) break	;	
 	}
 			
 	 
 	}
 	
 	void consol(String[] mass) {
-		Functional func=  new Functional(map);
+		Functional func =  new Functional(map);
 		String str = new  String ();
 		String[] filtr = mass[0].toString().trim().split("\\s+")  ;
-		int i=0;
+		int i = 0;
 		while (true)
 	{   
 		str = filtr[i].toString();
-		if (stepmode(filtr,func,i)==-1) break	;	
+		if (stepmode(filtr,func,i) == -1) break	;	
 		i++;
 	}
 			

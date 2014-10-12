@@ -11,20 +11,20 @@ public class Reader {
 	map = new HashMap<String, String>();
 	}
 	
-	public HashMap<String, String> read() {
-		StringBuilder st = new StringBuilder ();
-		StringBuilder st2 = new StringBuilder ();
+	public HashMap<String, String>read() {
+		StringBuilder st = new StringBuilder();
+		StringBuilder st2 = new StringBuilder();
 		int lenght;
 	try  (DataInputStream rd = new DataInputStream ( new FileInputStream (filepath))){
 		while (true) {
 			try {
 			lenght = rd.readInt();
-			for (int i = 0; i< lenght ; i++) {
+			for (int i = 0; i < lenght ; i++) {
 			st.append(rd.readChar());
 			
 			} 
 			lenght = rd.readInt();
-			for (int i = 0; i< lenght ; i++) {
+			for (int i = 0; i < lenght ; i++) {
 				st2.append(rd.readChar());
 				
 				};  

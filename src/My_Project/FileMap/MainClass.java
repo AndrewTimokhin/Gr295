@@ -10,14 +10,15 @@ public class MainClass {
 		Reader rd= new Reader (System.getProperty("db.file").toString());
 		HashMap<String, String> coll = new HashMap<String, String>();
 		coll = rd.read();
-		Set<String> show= coll.keySet();
+		Set<String> show = coll.keySet();
 		ModeWork mw = new ModeWork(coll);
-		if (args.length==0 ) 
+		if (args.length == 0 ) 
 		mw.usermode() ;
-             else mw.consol(args);
+             else { mw.consol(args);
+             }
 		Functional fn = new Functional(coll);
 		fn.list();
-		Collection<String> value= coll.values();
+		Collection<String> value = coll.values();
 		Write wr = new Write (args[0]);
         wr.write(coll);
 }}
