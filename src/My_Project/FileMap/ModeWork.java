@@ -9,7 +9,7 @@ class ModeWork {
 	}
 	
 	int stepmode(String[] array, Functional f, int index) {
-		switch (array[0 + index]) {
+	    switch (array[0 + index]) {
 		case "put":
 			f.put(array[1 + index], array[2 + index]);
 			return 2;
@@ -24,6 +24,7 @@ class ModeWork {
 			return 1;
 		case "exit":
 			return -1;
+			default: return -1;
 		}
 		return 1;
 	}
@@ -38,7 +39,8 @@ class ModeWork {
 			str = rd.nextLine().toString();
 			mass = str.trim().split(" ");
 			if (stepmode(mass, func, 0) == -1)
-				break;
+				{ break;
+				}
 		}
 
 	}
@@ -51,7 +53,8 @@ class ModeWork {
 		while (true) {
 			str = filtr[i].toString();
 			if (stepmode(filtr, func, i) == -1)
-				break;
+				{ break;
+				}
 			i++;
 		}
 
