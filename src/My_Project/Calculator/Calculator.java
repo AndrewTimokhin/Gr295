@@ -1,4 +1,4 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.Calculator;
+package ru.fizteh.fivt.students.AndrewTimokhin.calculator;
 
 import java.util.*;
 
@@ -10,7 +10,8 @@ class Calculator {  //class Calculator
  //System.out.println(">>Enter String>> : ->");
  //Scanner sc= new Scanner(System.in);
  try {
- String a = args[0].toString();
+ String b = args[0].toString();
+ String a = b.replace(" ", "");
  //String a= sc.next();
  Parser myparser = new Parser();
  try {
@@ -76,7 +77,7 @@ double eval(String str) throws Errors { // pars start
  control(2);
  }
  result = step1();  
- if (token.equals("\0")) {
+ if (!token.equals("\0")) {
  control(0);
  }
  return result;  
