@@ -3,13 +3,13 @@ package ru.fizteh.fivt.students.AndrewTimokhin.FileMap;
 import java.util.*;
 
 class ModeWork {
-    private HashMap<String, String> map;
+    private Map<String, String> map;
 
-    public ModeWork(HashMap<String, String> time) {
+    public ModeWork(Map<String, String> time) {
         map = time;
     }
 
-    int stepmode(String[] array, Functional f, int index) {
+    int stepMode(String[] array, Functional f, int index) {
         switch (array[0 + index]) {
         case "put":
             f.put(array[1 + index], array[2 + index]);
@@ -33,30 +33,34 @@ class ModeWork {
     void usermode() {
         Functional func = new Functional(map);
         String str = new String();
-        String[] mass;
+        String[] array;
         Scanner rd = new Scanner(System.in);
         while (true) {
             System.out.print("$ ");
             str = rd.nextLine().toString();
-            mass = str.trim().split(" ");
-            if (stepmode(mass, func, 0) == -1) {
+            array = str.trim().split(" ");
+            if (stepMode(array, func, 0) == -1) {
                 break;
             }
         }
 
     }
 
-    void consol(String[] mass) {
+    void interactive(String[] mass) {
+        int offset = 0;
         Functional func = new Functional(map);
-        String str = new String();
-        String[] filtr = mass[0].toString().trim().split("\\s+");
         int i = 0;
         while (true) {
-            str = filtr[i].toString();
-            if (stepmode(filtr, func, i) == -1) {
+            if (i < mass.length) {
+                offset = stepMode(mass, func, i);
+                i += offset;
+                if (offset == -1) {
+                    break;
+                }
+                i++;
+            } else {
                 break;
             }
-            i++;
         }
 
     }
