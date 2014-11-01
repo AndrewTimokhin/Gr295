@@ -59,8 +59,9 @@ public class TableWork {
         list = local.list();
         if (list != null) {
             for (int i = 0; i < list.length; i++) {
-                if (list[i].equals(tableToDel))
+                if (list[i].equals(tableToDel)) {
                     haveDir = 1; // if exist
+                }
             }
         }
         if (haveDir == 0) {
@@ -69,10 +70,11 @@ public class TableWork {
         }
 
         File delTable = new File(homeDir + "/" + tableToDel);
-        for (File file : new File(homeDir + "/" + tableToDel).listFiles())
+        for (File file : new File(homeDir + "/" + tableToDel).listFiles()) {
             if (file.isFile()) {
                 file.delete();
             }
+        }
         delTable.delete();
         System.out.println(tableToDel + " dropped");
         return 1; // if was deleted
@@ -82,12 +84,13 @@ public class TableWork {
         File local = new File(homeDir);
         String[] list;
         list = local.list();
-        if (list != null)
+        if (list != null) {
             for (int i = 0; i < list.length; i++) {
                 if (list[i].equals(numDir)) {
                     return 1; // if exist
                 }
             }
+        }
         return 0; // if n
     }
 
@@ -98,8 +101,9 @@ public class TableWork {
         if (list != null) {
             for (int i = 0; i < list.length; i++) {
                 if (list[i].equals(table))
+                {
                     return 1; // if exist
-
+                }
             }
         }
         return 0; // if added
