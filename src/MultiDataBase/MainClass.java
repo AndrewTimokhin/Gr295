@@ -12,11 +12,11 @@ public class MainClass {
             map[i] = new HashMap<String, Object>();
         }
 
-        Reader rd = new Reader("C:/Users/Андрей/Videos/DataBase");
+        Reader rd = new Reader(System.getProperty("fizteh.db.dir").toString());
         map = rd.read();
-        Write wr = new Write("C:/Users/Андрей/Videos/DataBase");
+        Write wr = new Write(System.getProperty("fizteh.db.dir").toString());
         Functional fn = new Functional(map);
-        ModeWork mw = new ModeWork(map, "C:/Users/Андрей/Videos/DataBase");
+        ModeWork mw = new ModeWork(map, System.getProperty("fizteh.db.dir").toString());
         mw.usermode(fn);
          
          
