@@ -15,7 +15,7 @@ public class Write {
         for (Integer i = 0; i < 16; i++) {
             if (map[i] != null) {
 
-                   for (Integer j = 0; j < 16; j++) {
+                for (Integer j = 0; j < 16; j++) {
                     String local = j.toString() + ".dat";
                     File tmp = new File(filepath + "/" + i.toString() + "/"
                             + local);
@@ -23,7 +23,7 @@ public class Write {
                     try (DataOutputStream out = new DataOutputStream(
                             new FileOutputStream(filepath + "/" + i.toString()
                                     + "/" + local))) {
-                       Set<String> st = map[i].keySet();
+                        Set<String> st = map[i].keySet();
                         for (String time : st) {
 
                             String tm = local.replaceAll(".dat", "");
@@ -44,13 +44,14 @@ public class Write {
                     } catch (IOException e) {
                         System.err.print("IOException " + e.toString());
                     }
-                    if (tmp.length() == 0)
+                    if (tmp.length() == 0) {
                         tmp.delete();
+                    }
                 }
             }
             if (map[i] == null) {
                 File delTable = new File(filepath + "/" + i.toString());
-                 
+
                 delTable.delete();
             }
         }

@@ -16,10 +16,10 @@ public class MainClass {
         map = rd.read();
         Write wr = new Write(System.getProperty("fizteh.db.dir").toString());
         Functional fn = new Functional(map);
-        ModeWork mw = new ModeWork(map, System.getProperty("fizteh.db.dir").toString());
+        ModeWork mw = new ModeWork(map, System.getProperty("fizteh.db.dir")
+                .toString());
         mw.usermode(fn);
-         
-         
+
         try {
             wr.write(map);
 
@@ -29,3 +29,4 @@ public class MainClass {
 
     }
 }
+

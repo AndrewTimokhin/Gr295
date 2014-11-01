@@ -6,12 +6,12 @@ import java.io.*;
 public class Reader {
     private TableWork tw = new TableWork();
     private String filepath;
-     
+
     private Map<String, Object>[] map;
 
     public Reader(String path) {
         filepath = path;
-         
+
         map = (Map<String, Object>[]) new Map[16];
 
     }
@@ -24,7 +24,7 @@ public class Reader {
                 StringBuilder valueBuilder = new StringBuilder();
                 File localbase = new File(filepath + "/" + i.toString());
                 String[] list = localbase.list();
-                if (list != null)
+                if (list != null) {
                     for (String currentDat : list) {
                         int length = 0;
                         try (DataInputStream rd = new DataInputStream(
@@ -48,9 +48,9 @@ public class Reader {
                                             "");
                                     valueBuilder.replace(0,
                                             valueBuilder.length(), "");
-                                    if (i == 15)
+                                    if (i == 15) {
                                         tw.setDir = -1;
-
+                                    }
                                 } catch (EOFException e) {
                                     break;
                                 }
@@ -68,6 +68,7 @@ public class Reader {
                             System.err.print(e.toString());
                         }
                     }
+                }
             }
         }
 
@@ -75,3 +76,4 @@ public class Reader {
     }
 
 }
+

@@ -6,8 +6,8 @@ class ModeWork {
     String dir;
     TableWork tw = new TableWork();
 
-    public ModeWork(Map<String, Object>[] time, String Dir) {
-        dir = Dir;
+    public ModeWork(Map<String, Object>[] time, String direct) {
+        dir = direct;
     }
 
     int stepMode(String[] array, Functional f, int index) {
@@ -31,10 +31,11 @@ class ModeWork {
             tw.dropForUser(f.map, Integer.parseInt(array[1 + index]));
             return 1;
         case "use":
-            if (tw.userUse(dir, array[1 + index]) == 0)
+            if (tw.userUse(dir, array[1 + index]) == 0) {
                 System.out.println("not exist");
-            else
+            } else {
                 System.out.println("using " + array[1 + index]);
+            }
             tw.setDir = Integer.parseInt(array[1 + index]
                     .replaceAll(".dat", ""));
             return 1;
@@ -78,3 +79,4 @@ class ModeWork {
      */
 
 }
+
