@@ -100,8 +100,7 @@ public class TableWork {
         list = local.list();
         if (list != null) {
             for (int i = 0; i < list.length; i++) {
-                if (list[i].equals(table))
-                {
+                if (list[i].equals(table)) {
                     return 1; // if exist
                 }
             }

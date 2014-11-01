@@ -54,12 +54,13 @@ class Functional {
                 }
 
     void showtables() {
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < 16; i++) {
             if (map[i] != null) {
                 if (map[i].size() == 0) {
                     map[i] = null;
                 }
             }
+    }
                        for (int i = 0; i < 16; i++) {
             if (map[i] != null) {
 
