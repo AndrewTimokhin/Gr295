@@ -14,12 +14,12 @@ public class JUnit {
 
 		mw.usermode(fn, tb);
 		Write wr = new Write();
-		if (tb.t != null)
+		if (tb.t != null) {
 			for (int i = 0; i < tb.t.length; i++) {
 
 				wr.write(tb.t[i], tb);
 			}
-
+		}
 	};
 
 }

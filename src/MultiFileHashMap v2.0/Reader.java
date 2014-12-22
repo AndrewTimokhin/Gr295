@@ -20,7 +20,7 @@ public class Reader {
 
 		int flag = 0;
 		File alldir = new File(filepath);
-		String file[] = alldir.list();
+		String [] file = alldir.list();
 
 		for (Integer i = 0; i < 16; i++) {
 			for (int j = 0; j < file.length; j++) {
@@ -30,7 +30,6 @@ public class Reader {
 				}
 			}
 			if (flag == 1)
-
 			{
 
 				StringBuilder keyBuilder = new StringBuilder();
@@ -64,9 +63,6 @@ public class Reader {
 											"");
 									valueBuilder.replace(0,
 											valueBuilder.length(), "");
-									if (i == 15) {
-
-									}
 								} catch (EOFException e) {
 									break;
 								}

@@ -15,42 +15,42 @@ class ModeWork {
 
 		switch (array[0 + index]) {
 		case "put":
-			if (f.indicator == -1)
+			if (f.indicator == -1) {
 				System.out.println("UNDEF");
-			else
+			} else {
 				for (int i = 2 + index; i < array.length; i++)
-
 				{
 					fn.put(f.t[f.indicator].map,
 							array[1 + index].hashCode() % 16, array[1 + index],
 							array[i]);
-
 				}
+			}
 			return 2;
 		case "get":
-			if (f.indicator == -1)
-				System.out.println("UNDEF");
-			else
+			if (f.indicator == -1) {
+				System.out.println("UNDEF"); }
+			else {
 				fn.get(f.t[f.indicator].map, array[1 + index].hashCode() % 16,
-						array[1 + index]);
-			return 1;
+						array[1 + index]); }
+			return 1; 
 		case "list":
-			if (f.indicator == -1)
+			if (f.indicator == -1) {
 				System.out.println("UNDEF");
+			}
 			else {
 				fn.list(f.t[f.indicator].map);
 			}
 			return 1;
 		case "remove":
-			if (f.indicator == -1)
+			if (f.indicator == -1) {
 				System.out.println("UNDEF");
-			else
+			}
+			else {
 				fn.remove(f.t[f.indicator].map,
-						array[1 + index].hashCode() % 16, array[1 + index]);
+						array[1 + index].hashCode() % 16, array[1 + index]); }
 			return 1;
 		case "create":
 			f.create(array[1 + index]);
-
 			return 1;
 		case "drop":
 			f.drop(array[1 + index]);

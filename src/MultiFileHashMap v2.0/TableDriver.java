@@ -24,8 +24,9 @@ public class TableDriver {
 		int summ = 0;
 		if (map != null) {
 			for (int i = 0; i < 16; i++) {
-				if (map[i] != null)
+				if (map[i] != null) {
 					summ += map[i].size();
+				}
 			}
 		}
 		return summ;

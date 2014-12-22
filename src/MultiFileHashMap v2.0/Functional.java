@@ -67,13 +67,15 @@ public class Functional {
 	}
 
 	void showtables(TableDriver[] td) throws IOException, NullPointerException {
-		if (td != null)
+		if (td != null) {
 			for (int i = 0; i < td.length; i++) {
-				if (td[i] != null)
+				if (td[i] != null) {
 
 					System.out.println("in table we have " + td[i].getName()
 							+ " " + td[i].size());
+				}
 			}
+	}
 	}
 
 }

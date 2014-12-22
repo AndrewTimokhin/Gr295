@@ -58,8 +58,8 @@ public class Write {
 						}
 					}
 					File tmp0 = new File(filepath + "\\" + i.toString());
-					if (tmp0.list().length == 0)
-						tmp0.delete();
+					if (tmp0.list().length == 0) {
+						tmp0.delete(); }
 				}
 				if (tm.map[i] == null) {
 					File delTable = new File(filepath + "\\" + i.toString());

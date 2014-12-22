@@ -5,7 +5,7 @@ import java.security.AccessControlException;
 import java.util.*;
 
 public class TableWork {
-	public TableDriver t[];
+	public TableDriver [] t ;
 	String homeDir;
 	int indicator;
 	int size;
@@ -29,10 +29,9 @@ public class TableWork {
 						t[0].map = rd.read(homeDir + "\\" + path);
 
 					} else {
-						TableDriver temp[] = new TableDriver[t.length + 1];
+						TableDriver [] temp = new TableDriver[t.length + 1];
 						for (int k = 0; k < t.length; k++)
-							temp[k] = t[k];
-
+							{ temp[k] = t[k]; }
 						temp[t.length] = new TableDriver(path);
 						temp[t.length].map = rd.read(homeDir + "\\" + path);
 
@@ -66,10 +65,9 @@ public class TableWork {
 			}
 			;
 			{
-
-				TableDriver temp[] = new TableDriver[t.length + 1];
+				TableDriver [] temp  = new TableDriver[t.length + 1];
 				for (int k = 0; k < t.length; k++)
-					temp[k] = t[k];
+					{ temp[k] = t[k]; }
 
 				temp[t.length] = new TableDriver(tableToAdd);
 				t = temp;
@@ -87,11 +85,11 @@ public class TableWork {
 	}
 
 	public void remove(File anyfile) {
-		if (!anyfile.exists())
-			return;
+		if (!anyfile.exists()) {
+			return; }
 		if (anyfile.isDirectory()) {
-			for (File f : anyfile.listFiles())
-				remove(f);
+			for (File f : anyfile.listFiles()) {
+				remove(f); }
 			anyfile.delete();
 		} else {
 			anyfile.delete();
@@ -109,12 +107,12 @@ public class TableWork {
 					t[i] = t[t.length - 1];
 					t[t.length - 1] = null;
 
-				} else
-					t[i] = null;
+				} else {
+					t[i] = null; }
 				size--;
 				System.out.println(tableToDel + " dropped");
 				File in = new File(homeDir);
-				String st[] = in.list();
+				String [] st = in.list();
 
 				if (st != null) {
 					for (String time : st) {
