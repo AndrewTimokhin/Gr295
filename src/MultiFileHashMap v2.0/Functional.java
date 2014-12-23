@@ -71,11 +71,20 @@ public class Functional {
          for (int i = 0; i < td.length; i++) {
             if (td[i] != null) {
 
+<<<<<<< HEAD
                System.out.println("in table we have " + td[i].getName()
                      + " " + td[i].size());
             }
          }
    }
    }
+=======
+					System.out.println( "in table we have " + td[i].getName()
+							+ " " + td[i].size());
+				}
+			}
+	}
+	}
+>>>>>>> c0d80ca3df618502ce607f4e1aeb211686b6e0b5
 
 }
