@@ -1,5 +1,4 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.MultiDataBase;
-
+package ru.fizteh.fivt.students.AndrewTimokhin.MultiFileHashMap;
 import java.io.IOException;
 import java.util.*;
 
