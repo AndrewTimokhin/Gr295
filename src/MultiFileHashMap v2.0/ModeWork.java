@@ -1,4 +1,4 @@
-package ru;
+package ru.fizteh.fivt.students.AndrewTimokhin.MultiFileHashMap;
 
 import java.io.IOException;
 import java.util.*;
