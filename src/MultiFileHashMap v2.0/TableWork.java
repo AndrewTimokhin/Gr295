@@ -31,8 +31,7 @@ public class TableWork {
 					} else {
 						TableDriver [] temp = new TableDriver[t.length + 1];
 						for (int k = 0; k < t.length; k++)
-							{ temp[k] = t[k]; 
-							}
+							{ temp[k] = t[k]; }
 						temp[t.length] = new TableDriver(path);
 						temp[t.length].map = rd.read(homeDir + "\\" + path);
 
@@ -66,8 +65,8 @@ public class TableWork {
 			}
 						{
 				TableDriver [] temp  = new TableDriver[t.length + 1];
-				for (int k = 0; k < t.length; k++)
-					{ temp[k] = t[k]; 
+				for (int k = 0; k < t.length; k++) {
+					  temp[k] = t[k]; 
 					}
 
 				temp[t.length] = new TableDriver(tableToAdd);
@@ -153,7 +152,8 @@ public class TableWork {
 					System.out.println("use");
 					return 0;
 				}
-			} }
+			} 
+			}
 		System.out.println("not exist");
 		return 1;
 

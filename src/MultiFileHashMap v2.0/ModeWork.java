@@ -35,17 +35,15 @@ class ModeWork {
 							return 1; 
 		case "list":
 			if (f.indicator == -1) {
-				System.out.println("UNDEF");
-			}
-			else {
+				System.out.println("UNDEF");  
+			} else {
 				fn.list(f.t[f.indicator].map);
 			}
 			return 1;
 		case "remove":
 			if (f.indicator == -1) {
-				System.out.println("UNDEF");
-			}
-			else {
+				System.out.println("UNDEF");  
+			}		else {
 				fn.remove(f.t[f.indicator].map,
 						array[1 + index].hashCode() % 16, array[1 + index]); 
 				}
@@ -58,17 +56,12 @@ class ModeWork {
 
 			return 1;
 		case "use":
-			if (f.userUse(array[1 + index]) == 0) {
-
-			} else {
-
-			}
-
+			 f.userUse(array[1 + index]);
 			return 1;
-
 		case "show":
-			if (array[1].equals("tables"))
+			if (array[1].equals("tables")) {
 				fn.showtables(f.t);
+			}
 			return 1;
 		case "exit":
 			return -1;
