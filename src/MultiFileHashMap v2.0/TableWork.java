@@ -31,7 +31,8 @@ public class TableWork {
 					} else {
 						TableDriver [] temp = new TableDriver[t.length + 1];
 						for (int k = 0; k < t.length; k++)
-							{ temp[k] = t[k]; }
+							{ temp[k] = t[k]; 
+							}
 						temp[t.length] = new TableDriver(path);
 						temp[t.length].map = rd.read(homeDir + "\\" + path);
 
@@ -63,11 +64,11 @@ public class TableWork {
 					return 1;
 				}
 			}
-			;
-			{
+						{
 				TableDriver [] temp  = new TableDriver[t.length + 1];
 				for (int k = 0; k < t.length; k++)
-					{ temp[k] = t[k]; }
+					{ temp[k] = t[k]; 
+					}
 
 				temp[t.length] = new TableDriver(tableToAdd);
 				t = temp;
@@ -86,7 +87,8 @@ public class TableWork {
 
 	public void remove(File anyfile) {
 		if (!anyfile.exists()) {
-			return; }
+			return; 
+			}
 		if (anyfile.isDirectory()) {
 			for (File f : anyfile.listFiles()) {
 				remove(f); }
@@ -100,7 +102,7 @@ public class TableWork {
 			IOException {
 		int haveDir = 0;
 		for (int i = 0; i < t.length; i++) {
-			if (t[i] != null && tableToDel.equals(t[i].getName()) == true) {
+			if (t[i] != null && tableToDel.equals(t[i].getName())) {
 
 				if (t.length != 1) {
 					TableDriver tm = new TableDriver();
@@ -108,7 +110,8 @@ public class TableWork {
 					t[t.length - 1] = null;
 
 				} else {
-					t[i] = null; }
+					t[i] = null; 
+					}
 				size--;
 				System.out.println(tableToDel + " dropped");
 				File in = new File(homeDir);
@@ -143,14 +146,14 @@ public class TableWork {
 	}
 
 	public int userUse(String tablename) throws NullPointerException {
-		if (t != null && t[0] != null)
+		if (t != null && t[0] != null) {
 			for (int i = 0; i < t.length; i++) {
 				if (t[i].getName().equals(tablename)) {
 					indicator = i;
 					System.out.println("use");
 					return 0;
 				}
-			}
+			} }
 		System.out.println("not exist");
 		return 1;
 

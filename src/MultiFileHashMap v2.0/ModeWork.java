@@ -18,9 +18,8 @@ class ModeWork {
 			if (f.indicator == -1) {
 				System.out.println("UNDEF");
 			} else {
-				for (int i = 2 + index; i < array.length; i++)
-				{
-					fn.put(f.t[f.indicator].map,
+				for (int i = 2 + index; i < array.length; i++) {
+									fn.put(f.t[f.indicator].map,
 							array[1 + index].hashCode() % 16, array[1 + index],
 							array[i]);
 				}
@@ -28,11 +27,12 @@ class ModeWork {
 			return 2;
 		case "get":
 			if (f.indicator == -1) {
-				System.out.println("UNDEF"); }
-			else {
-				fn.get(f.t[f.indicator].map, array[1 + index].hashCode() % 16,
-						array[1 + index]); }
-			return 1; 
+				System.out.println("UNDEF"); 
+				}
+			else { fn.get(f.t[f.indicator].map, array[1 + index].hashCode() % 16,
+					array[1 + index]); 
+			}
+							return 1; 
 		case "list":
 			if (f.indicator == -1) {
 				System.out.println("UNDEF");
@@ -47,7 +47,8 @@ class ModeWork {
 			}
 			else {
 				fn.remove(f.t[f.indicator].map,
-						array[1 + index].hashCode() % 16, array[1 + index]); }
+						array[1 + index].hashCode() % 16, array[1 + index]); 
+				}
 			return 1;
 		case "create":
 			f.create(array[1 + index]);

@@ -29,10 +29,8 @@ public class Reader {
 					break;
 				}
 			}
-			if (flag == 1)
-			{
-
-				StringBuilder keyBuilder = new StringBuilder();
+			if (flag == 1) {
+							StringBuilder keyBuilder = new StringBuilder();
 				StringBuilder valueBuilder = new StringBuilder();
 				File localbase = new File(filepath + "\\" + i.toString());
 
