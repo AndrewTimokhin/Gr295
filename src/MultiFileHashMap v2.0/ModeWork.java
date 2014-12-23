@@ -28,8 +28,7 @@ class ModeWork {
 		case "get":
 			if (f.indicator == -1) {
 				System.out.println("UNDEF"); 
-				}
-			else { fn.get(f.t[f.indicator].map, array[1 + index].hashCode() % 16,
+			}			else { fn.get(f.t[f.indicator].map, array[1 + index].hashCode() % 16,
 					array[1 + index]); 
 			}
 							return 1; 
