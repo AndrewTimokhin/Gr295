@@ -1,11 +1,11 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
+п»їpackage ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 
 import java.io.IOException;
 
 /**
- * Класс @class FactoryImplements отвечает за фабрику по созданию таблиц.
- * Имплиментируя интерфейс TableProviderFactory, переопределяет метод по
- * созданию провайдера базы данных.
+ * РљР»Р°СЃСЃ @class FactoryImplements РѕС‚РІРµС‡Р°РµС‚ Р·Р° С„Р°Р±СЂРёРєСѓ РїРѕ СЃРѕР·РґР°РЅРёСЋ С‚Р°Р±Р»РёС†.
+ * РРјРїР»РёРјРµРЅС‚РёСЂСѓСЏ РёРЅС‚РµСЂС„РµР№СЃ TableProviderFactory, РїРµСЂРµРѕРїСЂРµРґРµР»СЏРµС‚ РјРµС‚РѕРґ РїРѕ
+ * СЃРѕР·РґР°РЅРёСЋ РїСЂРѕРІР°Р№РґРµСЂР° Р±Р°Р·С‹ РґР°РЅРЅС‹С….
  *
  * @author Timokhin Andrew
  */
@@ -15,16 +15,16 @@ public class FactoryImplements implements TableProviderFactory {
     @Override
     public TableProvider create(String dir) {
         if (dir == null)
-            throw new IllegalArgumentException("Error in create-meth."); // если
-                                                                         // в
-                                                                         // параметрах
-                                                                         // указана
-        // неверный путь к директории,
-        // генерируется исключение
+            throw new IllegalArgumentException("Error in create-meth."); // РµСЃР»Рё
+                                                                         // РІ
+                                                                         // РїР°СЂР°РјРµС‚СЂР°С…
+                                                                         // СѓРєР°Р·Р°РЅР°
+        // РЅРµРІРµСЂРЅС‹Р№ РїСѓС‚СЊ Рє РґРёСЂРµРєС‚РѕСЂРёРё,
+        // РіРµРЅРµСЂРёСЂСѓРµС‚СЃСЏ РёСЃРєР»СЋС‡РµРЅРёРµ
         try {
-            return new TableProviderImplements(dir); // иначе, предпринимаеться
-                                                     // попытка по созданию
-            // провайдера базы данных
+            return new TableProviderImplements(dir); // РёРЅР°С‡Рµ, РїСЂРµРґРїСЂРёРЅРёРјР°РµС‚СЊСЃСЏ
+                                                     // РїРѕРїС‹С‚РєР° РїРѕ СЃРѕР·РґР°РЅРёСЋ
+            // РїСЂРѕРІР°Р№РґРµСЂР° Р±Р°Р·С‹ РґР°РЅРЅС‹С…
         } catch (IOException e) {
             // do nothing
         }
