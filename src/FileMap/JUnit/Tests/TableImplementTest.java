@@ -1,5 +1,5 @@
-/*
- * Модульные тесты базы данных.
+п»ї/*
+ * РњРѕРґСѓР»СЊРЅС‹Рµ С‚РµСЃС‚С‹ Р±Р°Р·С‹ РґР°РЅРЅС‹С….
  * 
  */
 package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
@@ -44,7 +44,7 @@ public class TableImplementTest {
    
 
     /**
-     * Тестирование getName  (большо одного нет смысла)
+     * РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ getName  (Р±РѕР»СЊС€Рѕ РѕРґРЅРѕРіРѕ РЅРµС‚ СЃРјС‹СЃР»Р°)
      */
     @Test
     public void testGetName() {
@@ -53,7 +53,7 @@ public class TableImplementTest {
     }
 
     /**
-     * Тесты на size method 
+     * РўРµСЃС‚С‹ РЅР° size method 
      */
     @Test
     public void testSizeByDefault() {
@@ -84,7 +84,7 @@ public class TableImplementTest {
     }
 
     /**
-     * Тестирование  put метода
+     * РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ  put РјРµС‚РѕРґР°
      */
     @Test(expected = IllegalArgumentException.class)
     public void testPutIfKeyIsNull () {
@@ -121,7 +121,7 @@ public class TableImplementTest {
     }
     
     /**
-     * Тестирование remove метода 
+     * РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ remove РјРµС‚РѕРґР° 
      */
  @Test(expected = IllegalArgumentException.class)
     public void testRemoveIfKeyNull() {
@@ -147,7 +147,7 @@ public class TableImplementTest {
   
 
     /**
-     * Тестирование метода commit 
+     * РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґР° commit 
      */
    @Test
     public void testCommitIfEmpty() {
@@ -175,7 +175,7 @@ public class TableImplementTest {
     
      
     /**
-     * Тестирование rollback метода
+     * РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ rollback РјРµС‚РѕРґР°
      */
    @Test
     public void testRollbackIfStateEmpty() {

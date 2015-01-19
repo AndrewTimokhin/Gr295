@@ -1,10 +1,10 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
+п»їpackage ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 
 import java.io.IOException;
 
 /**
- * Класс @class TableProviderImplements содержит логику по работе провайдера
- * базы данных. В нем переопределены все методы, заявленные в интерфейсе
+ * РљР»Р°СЃСЃ @class TableProviderImplements СЃРѕРґРµСЂР¶РёС‚ Р»РѕРіРёРєСѓ РїРѕ СЂР°Р±РѕС‚Рµ РїСЂРѕРІР°Р№РґРµСЂР°
+ * Р±Р°Р·С‹ РґР°РЅРЅС‹С…. Р’ РЅРµРј РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅС‹ РІСЃРµ РјРµС‚РѕРґС‹, Р·Р°СЏРІР»РµРЅРЅС‹Рµ РІ РёРЅС‚РµСЂС„РµР№СЃРµ
  * TableProvider
  * 
  * @author Timokhin Andrew
@@ -28,49 +28,49 @@ public class TableProviderImplements implements TableProvider {
     }
 
     @Override
-    public Table getTable(String name) throws IllegalArgumentException { // получение
-                                                                         // таблицы
-                                                                         // по
-                                                                         // ее
-                                                                         // имени
+    public Table getTable(String name) throws IllegalArgumentException { // РїРѕР»СѓС‡РµРЅРёРµ
+                                                                         // С‚Р°Р±Р»РёС†С‹
+                                                                         // РїРѕ
+                                                                         // РµРµ
+                                                                         // РёРјРµРЅРё
         if (name == null)
-            throw new IllegalArgumentException("Error in getTable-meth"); // вырабатывает
-                                                                          // исключение,
-                                                                          // если
-                                                                          // имя
-                                                                          // таблицы
-                                                                          // задано
-                                                                          // некорректно
+            throw new IllegalArgumentException("Error in getTable-meth"); // РІС‹СЂР°Р±Р°С‚С‹РІР°РµС‚
+                                                                          // РёСЃРєР»СЋС‡РµРЅРёРµ,
+                                                                          // РµСЃР»Рё
+                                                                          // РёРјСЏ
+                                                                          // С‚Р°Р±Р»РёС†С‹
+                                                                          // Р·Р°РґР°РЅРѕ
+                                                                          // РЅРµРєРѕСЂСЂРµРєС‚РЅРѕ
         if (t != null) {
             for (int i = 0; i < t.length; i++) {
                 if (t[i].getName().equals(name))
-                    return t[i]; // возврат таблицы, если такая существует
+                    return t[i]; // РІРѕР·РІСЂР°С‚ С‚Р°Р±Р»РёС†С‹, РµСЃР»Рё С‚Р°РєР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
 
             }
         }
-        return null; // возврат null в случае, если таблицу с указанным
-                     // названием невозможно найти
+        return null; // РІРѕР·РІСЂР°С‚ null РІ СЃР»СѓС‡Р°Рµ, РµСЃР»Рё С‚Р°Р±Р»РёС†Сѓ СЃ СѓРєР°Р·Р°РЅРЅС‹Рј
+                     // РЅР°Р·РІР°РЅРёРµРј РЅРµРІРѕР·РјРѕР¶РЅРѕ РЅР°Р№С‚Рё
     }
 
     @Override
-    public Table createTable(String name) throws IllegalArgumentException { // создает
-                                                                            // таблицу
-                                                                            // с
-                                                                            // указанным
-                                                                            // именем
+    public Table createTable(String name) throws IllegalArgumentException { // СЃРѕР·РґР°РµС‚
+                                                                            // С‚Р°Р±Р»РёС†Сѓ
+                                                                            // СЃ
+                                                                            // СѓРєР°Р·Р°РЅРЅС‹Рј
+                                                                            // РёРјРµРЅРµРј
         if (name == null)
-            throw new IllegalArgumentException("Error in createTable-meth"); // вырабатывает
-                                                                             // исключение,
-                                                                             // если
-                                                                             // имя
-                                                                             // таблицы
-                                                                             // задано
-                                                                             // некорректно
+            throw new IllegalArgumentException("Error in createTable-meth"); // РІС‹СЂР°Р±Р°С‚С‹РІР°РµС‚
+                                                                             // РёСЃРєР»СЋС‡РµРЅРёРµ,
+                                                                             // РµСЃР»Рё
+                                                                             // РёРјСЏ
+                                                                             // С‚Р°Р±Р»РёС†С‹
+                                                                             // Р·Р°РґР°РЅРѕ
+                                                                             // РЅРµРєРѕСЂСЂРµРєС‚РЅРѕ
         if (t != null) {
             for (int i = 0; i < t.length; i++) {
                 if (name.equals(t[i].getName())) {
-                    return null; // если таблица с указанным именем содержиться
-                                 // в агрегате, тогда возврат null
+                    return null; // РµСЃР»Рё С‚Р°Р±Р»РёС†Р° СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РёРјРµРЅРµРј СЃРѕРґРµСЂР¶РёС‚СЊСЃСЏ
+                                 // РІ Р°РіСЂРµРіР°С‚Рµ, С‚РѕРіРґР° РІРѕР·РІСЂР°С‚ null
                 }
             }
             {
@@ -85,8 +85,8 @@ public class TableProviderImplements implements TableProvider {
             }
         }
 
-        if (t == null) { // на случай пустого агрегата, сразу создаем таблицу
-                         // (без копирующего с пропуском алгоритма)
+        if (t == null) { // РЅР° СЃР»СѓС‡Р°Р№ РїСѓСЃС‚РѕРіРѕ Р°РіСЂРµРіР°С‚Р°, СЃСЂР°Р·Сѓ СЃРѕР·РґР°РµРј С‚Р°Р±Р»РёС†Сѓ
+                         // (Р±РµР· РєРѕРїРёСЂСѓСЋС‰РµРіРѕ СЃ РїСЂРѕРїСѓСЃРєРѕРј Р°Р»РіРѕСЂРёС‚РјР°)
             t = new TableImplement[1];
             t[0] = new TableImplement(name, dir);
             return t[0];
@@ -96,20 +96,20 @@ public class TableProviderImplements implements TableProvider {
 
     @Override
     public void removeTable(String name) throws IllegalArgumentException,
-            IllegalStateException { // удаление таблицы с указанным именем,
-                                    // возможна
-        // выроботка двух видов исключений
+            IllegalStateException { // СѓРґР°Р»РµРЅРёРµ С‚Р°Р±Р»РёС†С‹ СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РёРјРµРЅРµРј,
+                                    // РІРѕР·РјРѕР¶РЅР°
+        // РІС‹СЂРѕР±РѕС‚РєР° РґРІСѓС… РІРёРґРѕРІ РёСЃРєР»СЋС‡РµРЅРёР№
         if (name == null)
-            throw new IllegalArgumentException("Error in removeTable-meth"); // если
-                                                                             // название
-                                                                             // таблицы
-                                                                             // неверно,
-                                                                             // тогда
-                                                                             // возбуждает
-                                                                             // исключение
+            throw new IllegalArgumentException("Error in removeTable-meth"); // РµСЃР»Рё
+                                                                             // РЅР°Р·РІР°РЅРёРµ
+                                                                             // С‚Р°Р±Р»РёС†С‹
+                                                                             // РЅРµРІРµСЂРЅРѕ,
+                                                                             // С‚РѕРіРґР°
+                                                                             // РІРѕР·Р±СѓР¶РґР°РµС‚
+                                                                             // РёСЃРєР»СЋС‡РµРЅРёРµ
         if (t != null) {
-            for (int i = 0; i < t.length; i++) { // использует алгоритм
-                                                 // копирования с пропусками
+            for (int i = 0; i < t.length; i++) { // РёСЃРїРѕР»СЊР·СѓРµС‚ Р°Р»РіРѕСЂРёС‚Рј
+                                                 // РєРѕРїРёСЂРѕРІР°РЅРёСЏ СЃ РїСЂРѕРїСѓСЃРєР°РјРё
                 if (t[i].getName().equals(name)) {
                     t[i].backup = null;
                     t[i].map = null;
@@ -126,14 +126,14 @@ public class TableProviderImplements implements TableProvider {
                     return;
                 }
             }
-            throw new IllegalStateException("Error in removeTable-meth"); // если
-                                                                          // таблицы,
-                                                                          // соответствующей
-                                                                          // параметру
+            throw new IllegalStateException("Error in removeTable-meth"); // РµСЃР»Рё
+                                                                          // С‚Р°Р±Р»РёС†С‹,
+                                                                          // СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµР№
+                                                                          // РїР°СЂР°РјРµС‚СЂСѓ
                                                                           // name
-                                                                          // не
-                                                                          // существовало
-            // то генерация исключения неверного состояния
+                                                                          // РЅРµ
+                                                                          // СЃСѓС‰РµСЃС‚РІРѕРІР°Р»Рѕ
+            // С‚Рѕ РіРµРЅРµСЂР°С†РёСЏ РёСЃРєР»СЋС‡РµРЅРёСЏ РЅРµРІРµСЂРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
         }
 
     }

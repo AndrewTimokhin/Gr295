@@ -1,4 +1,4 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
+п»їpackage ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Класс @class Writer отвечает за физическую запись информации с на жесткий
- * диск или другой носитель информации. Логика работы устойчива к новым папкам и
- * т.д.
+ * РљР»Р°СЃСЃ @class Writer РѕС‚РІРµС‡Р°РµС‚ Р·Р° С„РёР·РёС‡РµСЃРєСѓСЋ Р·Р°РїРёСЃСЊ РёРЅС„РѕСЂРјР°С†РёРё СЃ РЅР° Р¶РµСЃС‚РєРёР№
+ * РґРёСЃРє РёР»Рё РґСЂСѓРіРѕР№ РЅРѕСЃРёС‚РµР»СЊ РёРЅС„РѕСЂРјР°С†РёРё. Р›РѕРіРёРєР° СЂР°Р±РѕС‚С‹ СѓСЃС‚РѕР№С‡РёРІР° Рє РЅРѕРІС‹Рј РїР°РїРєР°Рј Рё
+ * С‚.Рґ.
  *
  * @author Timokhin Andrew
  */
@@ -74,16 +74,16 @@ public class Writer {
                     keyList = ti.map.keySet();
                     for (String keyFind : keyList) {
                         Integer dirToWrite = new Integer(
-                                abs(keyFind.hashCode() % 16)); // номер
-                                                               // директории для
-                                                               // записи
+                                abs(keyFind.hashCode() % 16)); // РЅРѕРјРµСЂ
+                                                               // РґРёСЂРµРєС‚РѕСЂРёРё РґР»СЏ
+                                                               // Р·Р°РїРёСЃРё
                         String localPath = tp.dir + "\\" + ti.name + "\\"
                                 + dirToWrite.toString() + ".dir";
                         if (this.checkDir(localPath) == false)
                             this.createDir(localPath);
                         dirToWrite = new Integer(abs(ti.map.get(keyFind)
-                                .hashCode() % 16 % 16)); // номер файла для
-                                                         // записи
+                                .hashCode() % 16 % 16)); // РЅРѕРјРµСЂ С„Р°Р№Р»Р° РґР»СЏ
+                                                         // Р·Р°РїРёСЃРё
                         String localfile = localPath + "\\"
                                 + dirToWrite.toString();
                         if (this.checkDir(localfile) == false) {

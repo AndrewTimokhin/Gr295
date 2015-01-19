@@ -1,4 +1,4 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
+﻿package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 
 import java.io.IOException;
 import java.util.List;

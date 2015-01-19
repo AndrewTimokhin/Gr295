@@ -1,4 +1,4 @@
-/*
+п»ї/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -16,7 +16,7 @@ import org.junit.rules.TemporaryFolder;
 
 /**
  *
- * @author Андрей
+ * @author РђРЅРґСЂРµР№
  */
 public class TableProviderImplementsTest {
     @Rule 
@@ -30,11 +30,11 @@ public class TableProviderImplementsTest {
        tp = tpv.create(tmp.newFolder("time").getAbsolutePath());
     }
      /**
-     * Следующие тесты полностью тестируют реализацию интерфейса
+     * РЎР»РµРґСѓСЋС‰РёРµ С‚РµСЃС‚С‹ РїРѕР»РЅРѕСЃС‚СЊСЋ С‚РµСЃС‚РёСЂСѓСЋС‚ СЂРµР°Р»РёР·Р°С†РёСЋ РёРЅС‚РµСЂС„РµР№СЃР°
      */
     
     /**
-     * Тесты getTable метода
+     * РўРµСЃС‚С‹ getTable РјРµС‚РѕРґР°
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetTable() {
@@ -53,7 +53,7 @@ public class TableProviderImplementsTest {
         assertNull(tp.getTable("blablabla"));
     }
     /**
-     * Тесты  createTable метода
+     * РўРµСЃС‚С‹  createTable РјРµС‚РѕРґР°
      */
     
     @Test(expected = IllegalArgumentException.class)
@@ -61,7 +61,7 @@ public class TableProviderImplementsTest {
         tp.createTable(null);
     }
     
-    @Test //в данном тесте логично объединено два теста
+    @Test //РІ РґР°РЅРЅРѕРј С‚РµСЃС‚Рµ Р»РѕРіРёС‡РЅРѕ РѕР±СЉРµРґРёРЅРµРЅРѕ РґРІР° С‚РµСЃС‚Р°
     public void testCreateTableIfExist() {
         assertNotNull(tp.createTable("test"));
          assertNull(tp.createTable("test"));
@@ -69,7 +69,7 @@ public class TableProviderImplementsTest {
     
 
     /**
-     * Тесты removeTable метода
+     * РўРµСЃС‚С‹ removeTable РјРµС‚РѕРґР°
      */
     @Test(expected = IllegalArgumentException.class)
     public void testRemoveTable() {
