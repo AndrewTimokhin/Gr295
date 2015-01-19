@@ -19,20 +19,20 @@ import org.junit.rules.TemporaryFolder;
  * @author Андрей
  */
 public class TableProviderImplementsTest {
-    @Rule 
+    @Rule
     public TemporaryFolder tmp = new TemporaryFolder();
     public TableProvider tp;
-  
- 
+
     @Before
     public void setUp() {
-       TableProviderFactory tpv = new   FactoryImplements ();
-       tp = tpv.create(tmp.newFolder("time").getAbsolutePath());
+        TableProviderFactory tpv = new FactoryImplements();
+        tp = tpv.create(tmp.newFolder("time").getAbsolutePath());
     }
-     /**
+
+    /**
      * Следующие тесты полностью тестируют реализацию интерфейса
      */
-    
+
     /**
      * Тесты getTable метода
      */
@@ -40,57 +40,57 @@ public class TableProviderImplementsTest {
     public void testGetTable() {
         tp.getTable(null);
     }
-    
-    @Test 
+
+    @Test
     public void testGetTableNormal() {
         tp.createTable("test");
         assertNotNull(tp.getTable("test"));
     }
 
-     @Test 
+    @Test
     public void testGetTableIfDnExist() {
         tp.createTable("test");
         assertNull(tp.getTable("blablabla"));
     }
+
     /**
-     * Тесты  createTable метода
+     * Тесты createTable метода
      */
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void testCreateTable() {
         tp.createTable(null);
     }
-    
-    @Test //в данном тесте логично объединено два теста
+
+    @Test
+    // в данном тесте логично объединено два теста
     public void testCreateTableIfExist() {
         assertNotNull(tp.createTable("test"));
-         assertNull(tp.createTable("test"));
+        assertNull(tp.createTable("test"));
     }
-    
 
     /**
      * Тесты removeTable метода
      */
     @Test(expected = IllegalArgumentException.class)
     public void testRemoveTable() {
-         tp.removeTable(null);
-         
-         
+        tp.removeTable(null);
+
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void testRemoveTableDnExist() {
-        
-         tp.removeTable("test");
-                
+
+        tp.removeTable("test");
+
     }
-    
-    @Test 
+
+    @Test
     public void testRemoveTableIfExist() {
         tp.createTable("test");
-         tp.removeTable("test");
-        assertNull( tp.getTable("test"));
-                
+        tp.removeTable("test");
+        assertNull(tp.getTable("test"));
+
     }
-    
+
 }
