@@ -41,7 +41,7 @@ public class TableImplement implements Table {
                         // Исключения не вырабатываються.
         int summ = 0; // изначальный размер базы данных полагает равным 0.
         if (map != null) {
-            summ += map.size();// сохраняем реальное число записей, хранимых в БД
+            summ += map.size(); // сохраняем реальное число записей, хранимых в БД
         }
         return summ;
     }
@@ -155,8 +155,7 @@ public class TableImplement implements Table {
             for (String time1 : time) {
 
                 if (!(backup.get(time1).equals(map.get(time1)))) {
-                    counter++;
-                    } 
+                    counter++; }
                               else 
                                   if (!map.containsKey(time1)) {
                     counter++;
