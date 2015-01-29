@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Vector;
 
-import javax.naming.ldap.Rdn;
-
 /**
  * Класс @class Reader отвечает за физическое чтение данных с жесткого диска или
  * другого физического носителя информации.
@@ -31,7 +29,7 @@ public class Reader {
         Vector<TableImplement> agregat = new Vector<TableImplement>();
         int validator = 0;
         File testDir = new File(path);
-        if (testDir.list() != null)
+        if (testDir.list() != null) {
             for (String time : testDir.list()) {
                 File checkDir = new File(path + "\\" + time);
 
@@ -117,10 +115,11 @@ public class Reader {
                 }
 
             }
-
-        if (validator == 0)
-            return; // загружаем ранее сохраненные базы данных в нашу базу
-                    // данных
+        }
+        if (validator == 0) {
+            return;
+        }// загружаем ранее сохраненные базы данных в нашу базу
+         // данных
 
         TableImplement[] copy = new TableImplement[agregat.size()];
         i = 0;

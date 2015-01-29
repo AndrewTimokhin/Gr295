@@ -14,8 +14,9 @@ public class FactoryImplements implements TableProviderFactory {
 
     @Override
     public TableProvider create(String dir) {
-        if (dir == null)
+        if (dir == null) {
             throw new IllegalArgumentException("Error in create-meth.");
+        }
         // then, generate exception
         try {
             return new TableProviderImplements(dir);

@@ -1,8 +1,6 @@
 package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class JUnit {
     public static void main(String[] args) throws IOException,

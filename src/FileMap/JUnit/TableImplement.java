@@ -42,7 +42,7 @@ public class TableImplement implements Table {
         int summ = 0; // изначальный размер базы данных полагает равным 0.
         if (map != null) {
             summ += map.size();// сохраняем реальное число записей, хранимых в
-                               // базе данных.
+                               // БД
         }
         return summ;
     }
@@ -61,9 +61,11 @@ public class TableImplement implements Table {
             throw exception; // если ключ null,
                              // тогда возбуждается
         } // исключение
-        if (map != null)
-            if (map.containsKey(key))
+        if (map != null) {
+            if (map.containsKey(key)) {
                 return (String) map.get(key);
+            }
+        }
         return null;
 
     }
@@ -80,16 +82,19 @@ public class TableImplement implements Table {
                                                                                   // базу
                                                                                   // данных
         String time = null;
-        if (key == null || value == null)
+        if (key == null || value == null) {
             throw new IllegalArgumentException(
-                    "Error in put-meth. Key or (and) value is wrong."); // если
-                                                                        // неверно
-                                                                        // заданы
-                                                                        // аргументы
+                    "Error in put-meth. Key or (and) value is wrong.");
+        } // если
+          // неверно
+          // заданы
+          // аргументы
         // возбуждает исключение
-        if (map != null) // случай, если база данных была непуста
-            if (map.containsKey(key))
+        if (map != null) { // случай, если база данных была непуста
+            if (map.containsKey(key)) {
                 time = (String) map.get(key);
+            }
+        }
         map.put(key, value);
         return time; // возращает значение ранее ассоциированное с данным ключом
         // null- если не было ранее никаких ассоциаций
@@ -106,14 +111,16 @@ public class TableImplement implements Table {
                                                                      // параметрах
     {
         String time = null;
-        if (key == null)
+        if (key == null) {
             throw new IllegalArgumentException(
                     "Error in remove-meth. Key is wrong.");
-        if (map != null)
+        }
+        if (map != null) {
             if (map.containsKey(key)) {
                 time = (String) map.get(key);
                 map.remove(key);
             }
+        }
         return time;
 
     }
@@ -135,24 +142,29 @@ public class TableImplement implements Table {
     public int totalChanges() {
         int counter = 0;
 
-        if (backup == null && map == null)
-            return 0; // изменений нет, не нужно коммитеть
-        if (backup != null && map == null)
-            return backup.size(); // текущее состояние базы данных пусто, в
-                                  // бекапе есть записи, выполняеться перезапись
-        if (backup == null && map != null)
-            return map.size(); // аналогично
+        if (backup == null && map == null) {
+            return 0;
+        }// изменений нет, не нужно коммитеть
+        if (backup != null && map == null) {
+            return backup.size();
+        }// текущее состояние базы данных пусто, в
+         // бекапе есть записи, выполняеться перезапись
+        if (backup == null && map != null) {
+            return map.size();
+        } // аналогично
         if (backup != null && map != null) {
             Set<String> time = backup.keySet();
             for (String time1 : time) {
 
-                if (!(backup.get(time1).equals(map.get(time1))))
-                    counter++; // если одному и тому же ключу соответствуют
-                               // разные
-                               // значения
-                // то метод считает, что нужно изменить
-                else if (!map.containsKey(time1))
+                if (!(backup.get(time1).equals(map.get(time1)))) {
                     counter++;
+                } // если одному и тому же ключу соответствуют
+                  // разные
+                  // значения
+                // то метод считает, что нужно изменить
+                else if (!map.containsKey(time1)) {
+                    counter++;
+                }
             }
             time = map.keySet();
             for (String time1 : time) {
@@ -172,15 +184,16 @@ public class TableImplement implements Table {
     public int commit() {
         int counter = this.totalChanges();
         System.out.println("in this method counter is ==> " + counter);
-        if (counter != 0) // если есть изменения вызывается физичекая запись на
-                          // жесткий диск
+        if (counter != 0) { // если есть изменения вызывается физичекая запись
+                            // на
+                            // жесткий диск
             try {
 
                 this.writeToDisk();
             } catch (IOException e) {
                 // do nothing
             }
-
+        }
         return counter; // возвращаеться общий счетчик числа изменений
     }
 
@@ -227,8 +240,9 @@ public class TableImplement implements Table {
             this.backup = null;
         }
         for (int i = 0; i < tpi.t.length; i++) {
-            if (tpi.t[i].getName().equals(this.getName()))
+            if (tpi.t[i].getName().equals(this.getName())) {
                 tpi.t[i] = this;
+            }
 
         }
 
