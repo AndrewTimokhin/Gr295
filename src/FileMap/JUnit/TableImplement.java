@@ -58,8 +58,7 @@ public class TableImplement implements Table {
             IllegalArgumentException exception = new IllegalArgumentException(
                     "Error in get meth!");
             exception.initCause(new KeyNullAndNotFound("Error!"));
-            throw exception; // если ключ null,
-                             // тогда возбуждается
+            throw exception; // если ключ null, тогда возбуждается
         } // исключение
         if (map != null) {
             if (map.containsKey(key)) {
@@ -157,12 +156,11 @@ public class TableImplement implements Table {
             for (String time1 : time) {
 
                 if (!(backup.get(time1).equals(map.get(time1)))) {
-                    counter++;
-                } // если одному и тому же ключу соответствуют
-                  // разные
-                  // значения
-                // то метод считает, что нужно изменить
-                else if (!map.containsKey(time1)) {
+                    counter++;} // если одному и тому же ключу соответствуют
+                // разные
+                // значения
+              // то метод считает, что нужно изменить
+                              else if (!map.containsKey(time1)) {
                     counter++;
                 }
             }
@@ -224,11 +222,8 @@ public class TableImplement implements Table {
                                     new String(tpi.t[i].map.get(time)));
                         }
                         this.backup = new HashMap<String, String>(tmp);
-                        ;
-
-                    }
-
-                    tpi.t[i] = this;
+                     }
+                   tpi.t[i] = this;
                     flag = 1;
                 }
 
@@ -261,7 +256,6 @@ public class TableImplement implements Table {
         this.map = new HashMap<String, String>(this.backup);
         this.backup = time;
         this.commit();
-
         return 0;
     }
 }
