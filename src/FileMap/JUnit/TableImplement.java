@@ -155,9 +155,8 @@ public class TableImplement implements Table {
             for (String time1 : time) {
 
                 if (!(backup.get(time1).equals(map.get(time1)))) {
-                    counter++;
-                }
-                              else if (!map.containsKey(time1)) {
+                    counter++; } 
+                else if (!map.containsKey(time1)) {
                                                       counter++;
                 }
             }
