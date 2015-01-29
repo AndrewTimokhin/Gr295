@@ -1,8 +1,8 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
+п»їpackage ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 
 /**
- * Класс TableImplement содержит логику работы таблицы базы данных. 
- * В нем переопределены все методы, которые заявлены в интерфейсе Table
+ * РљР»Р°СЃСЃ TableImplement СЃРѕРґРµСЂР¶РёС‚ Р»РѕРіРёРєСѓ СЂР°Р±РѕС‚С‹ С‚Р°Р±Р»РёС†С‹ Р±Р°Р·С‹ РґР°РЅРЅС‹С…. 
+ * Р’ РЅРµРј РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅС‹ РІСЃРµ РјРµС‚РѕРґС‹, РєРѕС‚РѕСЂС‹Рµ Р·Р°СЏРІР»РµРЅС‹ РІ РёРЅС‚РµСЂС„РµР№СЃРµ Table
  * 
  * @author Timokhin Andrew
  */
@@ -16,51 +16,51 @@ import java.util.Set;
 
 public class TableImplement implements Table {
 
-    public String name; // содержит имя таблицы
-    public String path; // путь к таблице
-    public Map<String, String> map; // real-time версию карты
-    public Map<String, String> backup; // бэкапнутую версию базы данных
+    public String name; // СЃРѕРґРµСЂР¶РёС‚ РёРјСЏ С‚Р°Р±Р»РёС†С‹
+    public String path; // РїСѓС‚СЊ Рє С‚Р°Р±Р»РёС†Рµ
+    public Map<String, String> map; // real-time РІРµСЂСЃРёСЋ РєР°СЂС‚С‹
+    public Map<String, String> backup; // Р±СЌРєР°РїРЅСѓС‚СѓСЋ РІРµСЂСЃРёСЋ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 
     public TableImplement(String name, String path) {
-        this.path = path; // устанавливает путь к базе данных
-        this.name = name; // устанавливает имя базы данных
-        map = new HashMap<String, String>(); // выделение место под real-time
-                                             // карту
-        backup = new HashMap<String, String>(); // выделение места под
-                                                // backup-карту
+        this.path = path; // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РїСѓС‚СЊ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…
+        this.name = name; // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РёРјСЏ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
+        map = new HashMap<String, String>(); // РІС‹РґРµР»РµРЅРёРµ РјРµСЃС‚Рѕ РїРѕРґ real-time
+                                             // РєР°СЂС‚Сѓ
+        backup = new HashMap<String, String>(); // РІС‹РґРµР»РµРЅРёРµ РјРµСЃС‚Р° РїРѕРґ
+                                                // backup-РєР°СЂС‚Сѓ
 
     }
 
     @Override
-    public String getName() { // возвращает имя базы данных
+    public String getName() { // РІРѕР·РІСЂР°С‰Р°РµС‚ РёРјСЏ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
         return name;
     }
 
     @Override
-    public int size() { // Возврат числа ключей, хранимых в базе данных.
-                        // Исключения не вырабатываються.
-        int summ = 0; // изначальный размер базы данных полагает равным 0.
+    public int size() { // Р’РѕР·РІСЂР°С‚ С‡РёСЃР»Р° РєР»СЋС‡РµР№, С…СЂР°РЅРёРјС‹С… РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С….
+                        // РСЃРєР»СЋС‡РµРЅРёСЏ РЅРµ РІС‹СЂР°Р±Р°С‚С‹РІР°СЋС‚СЊСЃСЏ.
+        int summ = 0; // РёР·РЅР°С‡Р°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ Р±Р°Р·С‹ РґР°РЅРЅС‹С… РїРѕР»Р°РіР°РµС‚ СЂР°РІРЅС‹Рј 0.
         if (map != null) {
-            summ += map.size();// сохраняем реальное число записей, хранимых в
-                               // базе данных.
+            summ += map.size();// СЃРѕС…СЂР°РЅСЏРµРј СЂРµР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ Р·Р°РїРёСЃРµР№, С…СЂР°РЅРёРјС‹С… РІ
+                               // Р±Р°Р·Рµ РґР°РЅРЅС‹С….
         }
         return summ;
     }
 
     @Override
     public String get(String key) throws IllegalArgumentException,
-            KeyNullAndNotFound { // возврашает
-        // значение
-        // по
-        // указанному
-        // ключу
+            KeyNullAndNotFound { // РІРѕР·РІСЂР°С€Р°РµС‚
+        // Р·РЅР°С‡РµРЅРёРµ
+        // РїРѕ
+        // СѓРєР°Р·Р°РЅРЅРѕРјСѓ
+        // РєР»СЋС‡Сѓ
         if (key == null) {
             IllegalArgumentException exception = new IllegalArgumentException(
                     "Error in get meth!");
             exception.initCause(new KeyNullAndNotFound("Error!"));
-            throw exception; // если ключ null,
-                             // тогда возбуждается
-        } // исключение
+            throw exception; // РµСЃР»Рё РєР»СЋС‡ null,
+                             // С‚РѕРіРґР° РІРѕР·Р±СѓР¶РґР°РµС‚СЃСЏ
+        } // РёСЃРєР»СЋС‡РµРЅРёРµ
         if (map != null)
             if (map.containsKey(key))
                 return (String) map.get(key);
@@ -69,41 +69,41 @@ public class TableImplement implements Table {
     }
 
     @Override
-    public String put(String key, String value) throws IllegalArgumentException { // метод
-                                                                                  // создан
-                                                                                  // для
-                                                                                  // записи
-                                                                                  // ключа
-                                                                                  // и
-                                                                                  // значения
-                                                                                  // в
-                                                                                  // базу
-                                                                                  // данных
+    public String put(String key, String value) throws IllegalArgumentException { // РјРµС‚РѕРґ
+                                                                                  // СЃРѕР·РґР°РЅ
+                                                                                  // РґР»СЏ
+                                                                                  // Р·Р°РїРёСЃРё
+                                                                                  // РєР»СЋС‡Р°
+                                                                                  // Рё
+                                                                                  // Р·РЅР°С‡РµРЅРёСЏ
+                                                                                  // РІ
+                                                                                  // Р±Р°Р·Сѓ
+                                                                                  // РґР°РЅРЅС‹С…
         String time = null;
         if (key == null || value == null)
             throw new IllegalArgumentException(
-                    "Error in put-meth. Key or (and) value is wrong."); // если
-                                                                        // неверно
-                                                                        // заданы
-                                                                        // аргументы
-        // возбуждает исключение
-        if (map != null) // случай, если база данных была непуста
+                    "Error in put-meth. Key or (and) value is wrong."); // РµСЃР»Рё
+                                                                        // РЅРµРІРµСЂРЅРѕ
+                                                                        // Р·Р°РґР°РЅС‹
+                                                                        // Р°СЂРіСѓРјРµРЅС‚С‹
+        // РІРѕР·Р±СѓР¶РґР°РµС‚ РёСЃРєР»СЋС‡РµРЅРёРµ
+        if (map != null) // СЃР»СѓС‡Р°Р№, РµСЃР»Рё Р±Р°Р·Р° РґР°РЅРЅС‹С… Р±С‹Р»Р° РЅРµРїСѓСЃС‚Р°
             if (map.containsKey(key))
                 time = (String) map.get(key);
         map.put(key, value);
-        return time; // возращает значение ранее ассоциированное с данным ключом
-        // null- если не было ранее никаких ассоциаций
+        return time; // РІРѕР·СЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ СЂР°РЅРµРµ Р°СЃСЃРѕС†РёРёСЂРѕРІР°РЅРЅРѕРµ СЃ РґР°РЅРЅС‹Рј РєР»СЋС‡РѕРј
+        // null- РµСЃР»Рё РЅРµ Р±С‹Р»Рѕ СЂР°РЅРµРµ РЅРёРєР°РєРёС… Р°СЃСЃРѕС†РёР°С†РёР№
     }
 
     @Override
-    public String remove(String key) throws IllegalArgumentException // удаляем
-                                                                     // значение
-                                                                     // ассоциированное
-                                                                     // с
-                                                                     // ключом,
-                                                                     // переданным
-                                                                     // в
-                                                                     // параметрах
+    public String remove(String key) throws IllegalArgumentException // СѓРґР°Р»СЏРµРј
+                                                                     // Р·РЅР°С‡РµРЅРёРµ
+                                                                     // Р°СЃСЃРѕС†РёРёСЂРѕРІР°РЅРЅРѕРµ
+                                                                     // СЃ
+                                                                     // РєР»СЋС‡РѕРј,
+                                                                     // РїРµСЂРµРґР°РЅРЅС‹Рј
+                                                                     // РІ
+                                                                     // РїР°СЂР°РјРµС‚СЂР°С…
     {
         String time = null;
         if (key == null)
@@ -120,12 +120,12 @@ public class TableImplement implements Table {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public List<String> list() { // возврат списка, содержащего ключи базы
-                                 // данных
+    public List<String> list() { // РІРѕР·РІСЂР°С‚ СЃРїРёСЃРєР°, СЃРѕРґРµСЂР¶Р°С‰РµРіРѕ РєР»СЋС‡Рё Р±Р°Р·С‹
+                                 // РґР°РЅРЅС‹С…
         Set<String> time;
         if (map != null) {
-            time = map.keySet(); // получение ключей, имеющхся в базе данных в
-                                 // данный момент
+            time = map.keySet(); // РїРѕР»СѓС‡РµРЅРёРµ РєР»СЋС‡РµР№, РёРјРµСЋС‰С…СЃСЏ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С… РІ
+                                 // РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚
             List<?> list = new ArrayList(time);
             return (List<String>) list;
         }
@@ -136,21 +136,21 @@ public class TableImplement implements Table {
         int counter = 0;
 
         if (backup == null && map == null)
-            return 0; // изменений нет, не нужно коммитеть
+            return 0; // РёР·РјРµРЅРµРЅРёР№ РЅРµС‚, РЅРµ РЅСѓР¶РЅРѕ РєРѕРјРјРёС‚РµС‚СЊ
         if (backup != null && map == null)
-            return backup.size(); // текущее состояние базы данных пусто, в
-                                  // бекапе есть записи, выполняеться перезапись
+            return backup.size(); // С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ Р±Р°Р·С‹ РґР°РЅРЅС‹С… РїСѓСЃС‚Рѕ, РІ
+                                  // Р±РµРєР°РїРµ РµСЃС‚СЊ Р·Р°РїРёСЃРё, РІС‹РїРѕР»РЅСЏРµС‚СЊСЃСЏ РїРµСЂРµР·Р°РїРёСЃСЊ
         if (backup == null && map != null)
-            return map.size(); // аналогично
+            return map.size(); // Р°РЅР°Р»РѕРіРёС‡РЅРѕ
         if (backup != null && map != null) {
             Set<String> time = backup.keySet();
             for (String time1 : time) {
 
                 if (!(backup.get(time1).equals(map.get(time1))))
-                    counter++; // если одному и тому же ключу соответствуют
-                               // разные
-                               // значения
-                // то метод считает, что нужно изменить
+                    counter++; // РµСЃР»Рё РѕРґРЅРѕРјСѓ Рё С‚РѕРјСѓ Р¶Рµ РєР»СЋС‡Сѓ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‚
+                               // СЂР°Р·РЅС‹Рµ
+                               // Р·РЅР°С‡РµРЅРёСЏ
+                // С‚Рѕ РјРµС‚РѕРґ СЃС‡РёС‚Р°РµС‚, С‡С‚Рѕ РЅСѓР¶РЅРѕ РёР·РјРµРЅРёС‚СЊ
                 else if (!map.containsKey(time1))
                     counter++;
             }
@@ -158,9 +158,9 @@ public class TableImplement implements Table {
             for (String time1 : time) {
 
                 if (!backup.containsKey(time1)) {
-                    // аналогично, однако, если один ключ был удален, а другой
-                    // был
-                    // добавлен, то считаеться что было произведено 2 изменения
+                    // Р°РЅР°Р»РѕРіРёС‡РЅРѕ, РѕРґРЅР°РєРѕ, РµСЃР»Рё РѕРґРёРЅ РєР»СЋС‡ Р±С‹Р» СѓРґР°Р»РµРЅ, Р° РґСЂСѓРіРѕР№
+                    // Р±С‹Р»
+                    // РґРѕР±Р°РІР»РµРЅ, С‚Рѕ СЃС‡РёС‚Р°РµС‚СЊСЃСЏ С‡С‚Рѕ Р±С‹Р»Рѕ РїСЂРѕРёР·РІРµРґРµРЅРѕ 2 РёР·РјРµРЅРµРЅРёСЏ
                     counter++;
                 }
             }
@@ -172,8 +172,8 @@ public class TableImplement implements Table {
     public int commit() {
         int counter = this.totalChanges();
         System.out.println("in this method counter is ==> " + counter);
-        if (counter != 0) // если есть изменения вызывается физичекая запись на
-                          // жесткий диск
+        if (counter != 0) // РµСЃР»Рё РµСЃС‚СЊ РёР·РјРµРЅРµРЅРёСЏ РІС‹Р·С‹РІР°РµС‚СЃСЏ С„РёР·РёС‡РµРєР°СЏ Р·Р°РїРёСЃСЊ РЅР°
+                          // Р¶РµСЃС‚РєРёР№ РґРёСЃРє
             try {
 
                 this.writeToDisk();
@@ -181,19 +181,19 @@ public class TableImplement implements Table {
                 // do nothing
             }
 
-        return counter; // возвращаеться общий счетчик числа изменений
+        return counter; // РІРѕР·РІСЂР°С‰Р°РµС‚СЊСЃСЏ РѕР±С‰РёР№ СЃС‡РµС‚С‡РёРє С‡РёСЃР»Р° РёР·РјРµРЅРµРЅРёР№
     }
 
-    public void writeToDisk() throws IOException { // метод, реально
-                                                   // записывающий сделанные
-                                                   // изменения на диск
+    public void writeToDisk() throws IOException { // РјРµС‚РѕРґ, СЂРµР°Р»СЊРЅРѕ
+                                                   // Р·Р°РїРёСЃС‹РІР°СЋС‰РёР№ СЃРґРµР»Р°РЅРЅС‹Рµ
+                                                   // РёР·РјРµРЅРµРЅРёСЏ РЅР° РґРёСЃРє
         int flag = 0;
         Reader rd = new Reader();
 
         FactoryImplements tb = new FactoryImplements();
         TableProviderImplements tpi = (TableProviderImplements) tb.create(path);
 
-        rd.read(tpi); // считываем, имеющееся на диске
+        rd.read(tpi); // СЃС‡РёС‚С‹РІР°РµРј, РёРјРµСЋС‰РµРµСЃСЏ РЅР° РґРёСЃРєРµ
 
         Writer writer = new Writer();
         if (tpi.t != null) {
@@ -241,8 +241,8 @@ public class TableImplement implements Table {
     }
 
     @Override
-    public int rollback() { // отвечает за откат к предыдущему состоянию (к
-                            // самому последнему коммиту)
+    public int rollback() { // РѕС‚РІРµС‡Р°РµС‚ Р·Р° РѕС‚РєР°С‚ Рє РїСЂРµРґС‹РґСѓС‰РµРјСѓ СЃРѕСЃС‚РѕСЏРЅРёСЋ (Рє
+                            // СЃР°РјРѕРјСѓ РїРѕСЃР»РµРґРЅРµРјСѓ РєРѕРјРјРёС‚Сѓ)
         Map<String, String> time = new HashMap<String, String>(this.map);
         this.map = new HashMap<String, String>(this.backup);
         this.backup = time;

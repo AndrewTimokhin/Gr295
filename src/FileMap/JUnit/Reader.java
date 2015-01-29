@@ -1,4 +1,4 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
+п»їpackage ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 
 import java.io.DataInputStream;
 import java.io.EOFException;
@@ -12,8 +12,8 @@ import java.util.Vector;
 import javax.naming.ldap.Rdn;
 
 /**
- * Класс @class Reader отвечает за физическое чтение данных с жесткого диска или
- * другого физического носителя информации.
+ * РљР»Р°СЃСЃ @class Reader РѕС‚РІРµС‡Р°РµС‚ Р·Р° С„РёР·РёС‡РµСЃРєРѕРµ С‡С‚РµРЅРёРµ РґР°РЅРЅС‹С… СЃ Р¶РµСЃС‚РєРѕРіРѕ РґРёСЃРєР° РёР»Рё
+ * РґСЂСѓРіРѕРіРѕ С„РёР·РёС‡РµСЃРєРѕРіРѕ РЅРѕСЃРёС‚РµР»СЏ РёРЅС„РѕСЂРјР°С†РёРё.
  * 
  *
  * @author Timokhin Andrew
@@ -22,12 +22,12 @@ import javax.naming.ldap.Rdn;
 public class Reader {
     public void read(TableProviderImplements tp) throws IOException {
         int i;
-        StringBuilder keyBuilder = new StringBuilder(); // буфер для чтения
-                                                        // ключей
-        StringBuilder valueBuilder = new StringBuilder(); // буфер для чтения
-                                                          // значений
-        int length; // длина ключа/значения
-        String path = tp.dir; // корень хранилища
+        StringBuilder keyBuilder = new StringBuilder(); // Р±СѓС„РµСЂ РґР»СЏ С‡С‚РµРЅРёСЏ
+                                                        // РєР»СЋС‡РµР№
+        StringBuilder valueBuilder = new StringBuilder(); // Р±СѓС„РµСЂ РґР»СЏ С‡С‚РµРЅРёСЏ
+                                                          // Р·РЅР°С‡РµРЅРёР№
+        int length; // РґР»РёРЅР° РєР»СЋС‡Р°/Р·РЅР°С‡РµРЅРёСЏ
+        String path = tp.dir; // РєРѕСЂРµРЅСЊ С…СЂР°РЅРёР»РёС‰Р°
         Vector<TableImplement> agregat = new Vector<TableImplement>();
         int validator = 0;
         File testDir = new File(path);
@@ -39,8 +39,8 @@ public class Reader {
                     validator++;
                     TableImplement database = new TableImplement(time, tp.dir);
                     agregat.add(database);
-                    for (i = 0; i < 16; i++) { // сканируеться максимально
-                                               // возможное число директорий =
+                    for (i = 0; i < 16; i++) { // СЃРєР°РЅРёСЂСѓРµС‚СЊСЃСЏ РјР°РєСЃРёРјР°Р»СЊРЅРѕ
+                                               // РІРѕР·РјРѕР¶РЅРѕРµ С‡РёСЃР»Рѕ РґРёСЂРµРєС‚РѕСЂРёР№ =
                                                // 16
                         Integer numberDir = new Integer(i);
                         File locDB = new File(path + "\\" + time + "\\"
@@ -56,48 +56,48 @@ public class Reader {
                                     while (true) {
 
                                         try {
-                                            length = rd.readInt(); // на 1 шаге
-                                                                   // алгоритм
-                                                                   // считывает
-                                                                   // размер
-                                                                   // ключа
-                                            for (int k = 0; k < length; k++) { // читается
-                                                                               // ключ
+                                            length = rd.readInt(); // РЅР° 1 С€Р°РіРµ
+                                                                   // Р°Р»РіРѕСЂРёС‚Рј
+                                                                   // СЃС‡РёС‚С‹РІР°РµС‚
+                                                                   // СЂР°Р·РјРµСЂ
+                                                                   // РєР»СЋС‡Р°
+                                            for (int k = 0; k < length; k++) { // С‡РёС‚Р°РµС‚СЃСЏ
+                                                                               // РєР»СЋС‡
                                                 keyBuilder
                                                         .append(rd.readChar());
 
                                             }
-                                            length = rd.readInt(); // на 2 шаге
-                                                                   // алгоритм
-                                                                   // считывает
-                                                                   // размер
-                                                                   // значения
-                                            for (int k = 0; k < length; k++) { // считывается
-                                                                               // значение
+                                            length = rd.readInt(); // РЅР° 2 С€Р°РіРµ
+                                                                   // Р°Р»РіРѕСЂРёС‚Рј
+                                                                   // СЃС‡РёС‚С‹РІР°РµС‚
+                                                                   // СЂР°Р·РјРµСЂ
+                                                                   // Р·РЅР°С‡РµРЅРёСЏ
+                                            for (int k = 0; k < length; k++) { // СЃС‡РёС‚С‹РІР°РµС‚СЃСЏ
+                                                                               // Р·РЅР°С‡РµРЅРёРµ
                                                 valueBuilder.append(rd
                                                         .readChar());
 
                                             }
 
                                             database.map.put(
-                                                    keyBuilder.toString(), // добавление
-                                                                           // ключа/значения
-                                                                           // в
-                                                                           // карту
+                                                    keyBuilder.toString(), // РґРѕР±Р°РІР»РµРЅРёРµ
+                                                                           // РєР»СЋС‡Р°/Р·РЅР°С‡РµРЅРёСЏ
+                                                                           // РІ
+                                                                           // РєР°СЂС‚Сѓ
                                                     valueBuilder.toString());
                                             database.backup.put(
                                                     keyBuilder.toString(),
                                                     valueBuilder.toString());
                                             keyBuilder.replace(0,
-                                                    keyBuilder.length(), // сохранение
-                                                                         // начальных
-                                                                         // данных
-                                                                         // в
-                                                                         // бэкап
+                                                    keyBuilder.length(), // СЃРѕС…СЂР°РЅРµРЅРёРµ
+                                                                         // РЅР°С‡Р°Р»СЊРЅС‹С…
+                                                                         // РґР°РЅРЅС‹С…
+                                                                         // РІ
+                                                                         // Р±СЌРєР°Рї
                                                     "");
                                             valueBuilder.replace(0,
-                                                    valueBuilder.length(), ""); // сброс
-                                                                                // буфера
+                                                    valueBuilder.length(), ""); // СЃР±СЂРѕСЃ
+                                                                                // Р±СѓС„РµСЂР°
                                         } catch (EOFException e) {
 
                                             break;
@@ -119,8 +119,8 @@ public class Reader {
             }
 
         if (validator == 0)
-            return; // загружаем ранее сохраненные базы данных в нашу базу
-                    // данных
+            return; // Р·Р°РіСЂСѓР¶Р°РµРј СЂР°РЅРµРµ СЃРѕС…СЂР°РЅРµРЅРЅС‹Рµ Р±Р°Р·С‹ РґР°РЅРЅС‹С… РІ РЅР°С€Сѓ Р±Р°Р·Сѓ
+                    // РґР°РЅРЅС‹С…
 
         TableImplement[] copy = new TableImplement[agregat.size()];
         i = 0;
