@@ -10,163 +10,147 @@ package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class TableImplement implements Table {
+public class TableImplement<V> implements Table {
 
-    public String name; // содержит имя таблицы
-    public String path; // путь к таблице
-    public Map<String, String> map; // real-time версию карты
-    public Map<String, String> backup; // бэкапнутую версию базы данных
+    private String name;
+    private String path;
+    private Map<String, String> map;
+    private Map<String, String> backup;
+    public Map<String, String> current;
 
     public TableImplement(String name, String path) {
-        this.path = path; // устанавливает путь к базе данных
-        this.name = name; // устанавливает имя базы данных
-        map = new HashMap<String, String>(); // выделение место под real-time
-                                             // карту
-        backup = new HashMap<String, String>(); // выделение места под
-                                                // backup-карту
+        this.path = path;
+        this.name = name;
+        map = new HashMap<String, String>();
+        backup = new HashMap<String, String>();
+        current = new HashMap<String, String>();
+    }
 
+    public String getPath() {
+        return path;
+    }
+
+    public Map<String, String> getMap() {
+        return map;
+    }
+
+    public Map<String, String> getBackup() {
+        return backup;
+    }
+
+    public void setBackup(Map<String, String> backup) {
+        this.backup = backup;
+    }
+
+    public void setMap(Map<String, String> map) {
+        this.map = map;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     @Override
-    public String getName() { // возвращает имя базы данных
+    public String getName() {
         return name;
     }
 
     @Override
-    public int size() { // Возврат числа ключей, хранимых в базе данных.
-                        // Исключения не вырабатываються.
-        int summ = 0; // изначальный размер базы данных полагает равным 0.
+    public int size() {
+        int size = 0;
         if (map != null) {
-            summ += map.size(); // сохраняем реальное число записей, хранимых в БД
+            size += map.size();
         }
-        return summ;
+        return size;
     }
 
     @Override
     public String get(String key) throws IllegalArgumentException,
-            KeyNullAndNotFound { // возврашает
-        // значение
-        // по
-        // указанному
-        // ключу
+            KeyNullAndNotFound {
         if (key == null) {
-            IllegalArgumentException exception = new IllegalArgumentException(
-                    "Error in get meth!");
-            exception.initCause(new KeyNullAndNotFound("Error!"));
-            throw exception; // если ключ null, тогда возбуждается
-        } // исключение
+            throw new KeyNullAndNotFound("Info: Key is null");
+        }
         if (map != null) {
             if (map.containsKey(key)) {
-                return (String) map.get(key);
+                return map.get(key);
             }
         }
         return null;
-
     }
 
     @Override
-    public String put(String key, String value) throws IllegalArgumentException { // метод
-                                                                                  // создан
-                                                                                  // для
-                                                                                  // записи
-                                                                                  // ключа
-                                                                                  // и
-                                                                                  // значения
-                                                                                  // в
-                                                                                  // базу
-                                                                                  // данных
+    public String put(String key, String value) throws IllegalArgumentException {
         String time = null;
         if (key == null || value == null) {
             throw new IllegalArgumentException(
-                    "Error in put-meth. Key or (and) value is wrong.");
-        } // если
-          // неверно
-          // заданы
-          // аргументы
-        // возбуждает исключение
-        if (map != null) { // случай, если база данных была непуста
+                    "Info: Key or (and) value is wrong.");
+        }
+        if (map != null) {
             if (map.containsKey(key)) {
                 time = (String) map.get(key);
             }
         }
         map.put(key, value);
-        return time; // возращает значение ранее ассоциированное с данным ключом
-        // null- если не было ранее никаких ассоциаций
+        return time;
     }
 
     @Override
-    public String remove(String key) throws IllegalArgumentException // удаляем
-                                                                     // значение
-                                                                     // ассоциированное
-                                                                     // с
-                                                                     // ключом,
-                                                                     // переданным
-                                                                     // в
-                                                                     // параметрах
-    {
+    public String remove(String key) throws IllegalArgumentException {
         String time = null;
         if (key == null) {
-            throw new IllegalArgumentException(
-                    "Error in remove-meth. Key is wrong.");
+            throw new IllegalArgumentException("Info: Key is wrong.");
         }
-        if (map != null) {
+        if (map != null) { // if map is empty, then it is null
             if (map.containsKey(key)) {
                 time = (String) map.get(key);
                 map.remove(key);
             }
         }
         return time;
-
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public List<String> list() { // возврат списка, содержащего ключи базы
-                                 // данных
+    public List<String> list() {
         Set<String> time;
         if (map != null) {
-            time = map.keySet(); // получение ключей, имеющхся в базе данных в
-                                 // данный момент
-            List<?> list = new ArrayList(time);
-            return (List<String>) list;
+            return new ArrayList<String>(map.keySet());
         }
-        return (List<String>) (new ArrayList());
+        return new ArrayList<String>(); // if map is empty
     }
 
     public int totalChanges() {
         int counter = 0;
-
         if (backup == null && map == null) {
             return 0;
-        }// изменений нет, не нужно коммитеть
+        }
         if (backup != null && map == null) {
             return backup.size();
-        }// текущее состояние базы данных пусто, в
-         // бекапе есть записи, выполняеться перезапись
+        }
         if (backup == null && map != null) {
             return map.size();
-        } // аналогично
+        }
         if (backup != null && map != null) {
-            Set<String> time = backup.keySet();
-            for (String time1 : time) {
-
-                if (!(backup.get(time1).equals(map.get(time1)))) {
-                    counter++; } 
-                else if (!map.containsKey(time1)) {
-                                                      counter++;
+            Set<String> backupKey = backup.keySet();
+            for (String timeKey : backupKey) {
+                if (map.containsKey(timeKey)
+                        && !(backup.get(timeKey).equals(map.get(timeKey)))) {
+                    counter++;
+                } else if (!map.containsKey(timeKey)) {
+                    counter++;
                 }
             }
-            time = map.keySet();
-            for (String time1 : time) {
-
-                if (!backup.containsKey(time1)) {
-                    // аналогично, однако, если один ключ был удален, а другой
-                    // был
-                    // добавлен, то считаеться что было произведено 2 изменения
+            backupKey = map.keySet();
+            for (String timeKey : backupKey) {
+                if (!backup.containsKey(timeKey)) {
                     counter++;
                 }
             }
@@ -176,82 +160,57 @@ public class TableImplement implements Table {
 
     @Override
     public int commit() {
-        int counter = this.totalChanges();
-        System.out.println("in this method counter is ==> " + counter);
-        if (counter != 0) { // если есть изменения вызывается физичекая запись
-                            // на
-                            // жесткий диск
-            try {
-
-                this.writeToDisk();
-            } catch (IOException e) {
-                // do nothing
-            }
+        try {
+            return this.writeToDisk();
+        } catch (IOException ioexcptn) {
+            throw new RuntimeException("Cannot write to the File System");
         }
-        return counter; // возвращаеться общий счетчик числа изменений
     }
 
-    public void writeToDisk() throws IOException { // метод, реально
-                                                   // записывающий сделанные
-                                                   // изменения на диск
-        int flag = 0;
+    public int writeToDisk() throws IOException {
+        boolean flagIfBaseExist = false;
         Reader rd = new Reader();
-
         FactoryImplements tb = new FactoryImplements();
-        TableProviderImplements tpi = (TableProviderImplements) tb.create(path);
-
-        rd.read(tpi); // считываем, имеющееся на диске
-
+        TableProviderImplements tableProvider = (TableProviderImplements) tb
+                .create(path);
+        rd.read(tableProvider);
         Writer writer = new Writer();
-        if (tpi.t != null) {
-            for (int i = 0; i < tpi.t.length; i++) {
-                // System.out.println(tpi.t[i].getName());
-                if (tpi.t[i].getName().equals(this.getName())) {
-
+        if (tableProvider.collection != null) {
+            {
+                if (tableProvider.collection.containsKey(this.getName())) {
                     {
-                        Map<String, String> tmp = new HashMap<String, String>();
-                        @SuppressWarnings("unchecked")
-                        Set<String> copy = tpi.t[i].map.keySet();
+                        Map<String, String> tmp = new HashMap<>();
+                        Set<String> copy = tableProvider.collection.get(name).map
+                                .keySet();
                         for (String time : copy) {
-
                             tmp.put(new String(time),
-                                    new String(tpi.t[i].map.get(time)));
+                                    new String(
+                                            (String) tableProvider.collection
+                                                    .get(name).map.get(time)));
                         }
                         this.backup = new HashMap<String, String>(tmp);
-                     }
-                   tpi.t[i] = this;
-                    flag = 1;
+                    }
+                    tableProvider.collection.put(this.getName(), this);
+                    flagIfBaseExist = true;
                 }
-
             }
-
         }
-        if (flag == 0) {
-            tpi.createTable(this.name);
+        if (!flagIfBaseExist) {
+            tableProvider.createTable(this.name);
             this.backup = null;
         }
-        for (int i = 0; i < tpi.t.length; i++) {
-            if (tpi.t[i].getName().equals(this.getName())) {
-                tpi.t[i] = this;
-            }
-
-        }
-
-        writer.write(tpi);
-        if (this.map == null) {
-            // this.commit();
-
-        }
-
+        if (tableProvider.collection.containsKey(this.getName()))
+            tableProvider.collection.put(this.getName(), this);
+        if (this.totalChanges() > 0)
+            writer.write(tableProvider);
+        return this.totalChanges();
     }
 
     @Override
-    public int rollback() { // отвечает за откат к предыдущему состоянию (к
-                            // самому последнему коммиту)
+    public int rollback() {
         Map<String, String> time = new HashMap<String, String>(this.map);
         this.map = new HashMap<String, String>(this.backup);
         this.backup = time;
-        this.commit();
-        return 0;
+        return this.commit();
     }
 }

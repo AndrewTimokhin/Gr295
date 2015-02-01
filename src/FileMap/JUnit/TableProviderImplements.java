@@ -1,145 +1,99 @@
 package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Класс @class TableProviderImplements содержит логику по работе провайдера
- * базы данных. В нем переопределены все методы, заявленные в интерфейсе
- * TableProvider
- * 
  * @author Timokhin Andrew
  */
 
 public class TableProviderImplements implements TableProvider {
 
-    public TableImplement[] t;
+    public static void deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                File f = new File(dir, children[i]);
+                deleteDir(f);
+            }
+            dir.delete();
+        } else
+            dir.delete();
+    }
+
+    protected Map<String, TableImplement> collection;
     public final String dir;
 
     TableProviderImplements(String dir) throws IOException {
         this.dir = dir;
-        t = null;
+        collection = new HashMap<>();
         Reader rd = new Reader();
         rd.read(this);
     }
 
-    public void writer() throws IOException {
-        Writer writer = new Writer();
-        writer.write(this);
+    public void write() throws IOException {
+        Writer writeToFileSystem = new Writer();
+        writeToFileSystem.write(this);
     }
 
     @Override
-    public Table getTable(String name) throws IllegalArgumentException { // получение
-                                                                         // таблицы
-                                                                         // по
-                                                                         // ее
-                                                                         // имени
+    public Table getTable(String name) throws IllegalArgumentException {
         if (name == null) {
-            throw new IllegalArgumentException("Error in getTable-meth");
-        } // вырабатывает
-          // исключение,
-          // если
-          // имя
-          // таблицы
-          // задано
-          // некорректно
-        if (t != null) {
-            for (int i = 0; i < t.length; i++) {
-                if (t[i].getName().equals(name)) {
-                    return t[i];
-                }// возврат таблицы, если такая существует
-
-            }
+            throw new IllegalArgumentException(
+                    "Info: Name of DataBase is null. Please, enter correct name");
         }
-        return null; // возврат null в случае, если таблицу с указанным
-                     // названием невозможно найти
+        if (collection != null) { // if database is created now
+            if (collection.containsKey(name))
+                return collection.get(name);
+        }
+        return null;
     }
 
     @Override
-    public Table createTable(String name) throws IllegalArgumentException { // создает
-                                                                            // таблицу
-                                                                            // с
-                                                                            // указанным
-                                                                            // именем
+    public Table createTable(String name) throws IllegalArgumentException {
         if (name == null) {
-            throw new IllegalArgumentException("Error in createTable-meth");
-        } // вырабатывает
-          // исключение,
-          // если
-          // имя
-          // таблицы
-          // задано
-          // некорректно
-        if (t != null) {
-            for (int i = 0; i < t.length; i++) {
-                if (name.equals(t[i].getName())) {
-                    return null; // если таблица с указанным именем содержиться
-                                 // в агрегате, тогда возврат null
-                }
-            }
+            throw new IllegalArgumentException(
+                    "Info: Name of DataBase is null. Please, enter correct name");
+        }
+        if (collection != null) {
+            if (collection.containsKey(name))
+                return null;
             {
-                TableImplement[] temp = new TableImplement[t.length + 1];
-                for (int k = 0; k < t.length; k++) {
-                    temp[k] = t[k];
-                }
-
-                temp[t.length] = new TableImplement(name, dir);
-                t = temp;
-                return t[t.length - 1];
+                collection.put(name, new TableImplement(name, dir));
+                return collection.get(name);
             }
         }
-
-        if (t == null) { // на случай пустого агрегата, сразу создаем таблицу
-                         // (без копирующего с пропуском алгоритма)
-            t = new TableImplement[1];
-            t[0] = new TableImplement(name, dir);
-            return t[0];
+        if (collection == null) {
+            collection = new HashMap<>();
+            collection.put(name, new TableImplement(name, dir));
+            return collection.get(name);
         }
         return null;
     }
 
     @Override
     public void removeTable(String name) throws IllegalArgumentException,
-            IllegalStateException { // удаление таблицы с указанным именем,
-                                    // возможна
-        // выроботка двух видов исключений
+            IllegalStateException {
         if (name == null) {
-            throw new IllegalArgumentException("Error in removeTable-meth");
-        }// если
-         // название
-         // таблицы
-         // неверно,
-         // тогда
-         // возбуждает
-         // исключение
-        if (t != null) {
-            for (int i = 0; i < t.length; i++) { // использует алгоритм
-                                                 // копирования с пропусками
-                if (t[i].getName().equals(name)) {
-                    t[i].backup = null;
-                    t[i].map = null;
-                    t[i].name = null;
-                    TableImplement[] temp = new TableImplement[t.length - 1];
-                    for (int j = 0; j < i; j++) {
-                        temp[j] = t[j];
-                    }
-
-                    for (int j = i + 1; j < t.length; j++) {
-                        temp[j - 1] = t[j];
-                    }
-                    t = temp;
-                    return;
-                }
-            }
-            throw new IllegalStateException("Error in removeTable-meth"); // если
-                                                                          // таблицы,
-                                                                          // соответствующей
-                                                                          // параметру
-                                                                          // name
-                                                                          // не
-                                                                          // существовало
-            // то генерация исключения неверного состояния
+            throw new IllegalArgumentException(
+                    "Info: Name of DataBase is null. Please, enter correct name");
         }
-
+        if (collection != null) {
+            if (collection.containsKey(name)) {
+                Path path = Paths.get(
+                        collection.get(name).getPath().toString(), collection
+                                .get(name).getName());
+                File file = new File(path.toString());
+                this.deleteDir(file);
+                collection.remove(name);
+                return;
+            }
+        }
+        throw new IllegalStateException("Requested database don't exist");
     }
-
 }

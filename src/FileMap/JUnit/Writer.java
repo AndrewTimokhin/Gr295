@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Set;
+import static java.lang.Math.abs;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Класс @class Writer отвечает за физическую запись информации с на жесткий
@@ -15,38 +18,36 @@ import java.util.Set;
  */
 
 public class Writer {
+    final int totalSubDir = 16;
+    final String dirct = ".dir";
 
     boolean checkDir(String name) {
-        File time = new File(name);
-        return time.exists();
+        File tmpFile = new File(name);
+        return tmpFile.exists();
 
     }
 
     void createDir(String path) {
-        File time = new File(path);
-        time.mkdir();
-        // System.out.println(path);
+        File tmpDir = new File(path);
+        tmpDir.mkdir();
         return;
     }
 
     void createFile(String path) throws IOException {
 
-        File time = new File(path);
-
-        File prepareToMakeDir = new File(time.getParent().toString());
+        File tmpFile = new File(path);
+        File prepareToMakeDir = new File(tmpFile.getParent().toString());
         prepareToMakeDir.mkdirs();
-        // System.out.println(prepareToMakeDir.getAbsolutePath());
-        time.createNewFile();
+        tmpFile.createNewFile();
         return;
     }
 
     public void deleteDirectory(File dir) {
-
         if (dir.isDirectory()) {
             String[] children = dir.list();
             for (int i = 0; i < children.length; i++) {
-                File f = new File(dir, children[i]);
-                deleteDirectory(f);
+                File tmpFile = new File(dir, children[i]);
+                deleteDirectory(tmpFile);
             }
             dir.delete();
         } else {
@@ -54,50 +55,48 @@ public class Writer {
         }
     }
 
-    public int abs(int digital) {
-        if (digital < 0) {
-            return -digital;
-        }
-        return digital;
-    }
-
     public void write(TableProviderImplements tp) throws IOException {
-
         this.deleteDirectory(new File(tp.dir));
-        File fl = new File(tp.dir);
-        fl.mkdir();
-        if (tp.t != null) {
-            for (TableImplement ti : tp.t) {
-                File db = new File(tp.dir + "\\" + ti.name);
-                db.mkdir();
-                if (ti.map != null) {
+        File baseDir = new File(tp.dir);
+        baseDir.mkdir();
+        if (tp.collection != null) {
+            Set<String> dataBase = tp.collection.keySet();
+            for (String name : dataBase) {
+                TableImplement ti = tp.collection.get(name);
+                Path pathToDb = Paths.get(tp.dir, ti.getName());
+                File dataBaseDir = new File(pathToDb.toString());
+                dataBaseDir.mkdir();
+                if (ti.getMap() != null) {
                     Set<String> keyList;
-                    keyList = ti.map.keySet();
+                    keyList = ti.getMap().keySet();
                     for (String keyFind : keyList) {
-                        Integer dirToWrite = new Integer(
-                                abs(keyFind.hashCode() % 16)); // номер
-                                                               // директории для
-                                                               // записи
-                        String localPath = tp.dir + "\\" + ti.name + "\\"
-                                + dirToWrite.toString() + ".dir";
-                        if (!this.checkDir(localPath)) {
-                            this.createDir(localPath);
+                        Integer dirToWrite = new Integer(abs(keyFind.hashCode()
+                                % totalSubDir));
+                        Path localPath = Paths.get(tp.dir, ti.getName(),
+                                dirToWrite.toString() + dirct);
+                        if (!this.checkDir(localPath.toString())) {
+                            this.createDir(localPath.toString());
                         }
-                        dirToWrite = new Integer(abs(ti.map.get(keyFind)
-                                .hashCode() % 16 % 16)); // номер файла для
-                                                         // записи
-                        String localfile = localPath + "\\"
-                                + dirToWrite.toString();
-                        if (!this.checkDir(localfile)) {
-                            this.createFile(localfile);
+                        dirToWrite = new Integer((ti.getMap().get(keyFind)
+                                .hashCode()
+                                % totalSubDir % totalSubDir));
+                        Path localFile = Paths.get(localPath.toString(),
+                                dirToWrite.toString());
+                        File checkIfExist = new File(localFile.toString());
+                        if (!this.checkDir(localFile.toString())
+                                && !checkIfExist.exists()) {
+
+                            this.createFile(localFile.toString());
                         }
-                        DataOutputStream out = new DataOutputStream(
-                                new FileOutputStream(localfile));
-                        out.writeInt(keyFind.length());
-                        out.writeChars(keyFind);
-                        out.writeInt(ti.map.get(keyFind).length());
-                        out.writeChars(ti.map.get(keyFind));
-                        out.close();
+                        DataOutputStream outStream = new DataOutputStream(
+                                new FileOutputStream(localFile.toString(), true));
+                        outStream.writeInt(keyFind.length());
+                        outStream.writeChars(keyFind);
+                        outStream.writeInt(ti.getMap().get(keyFind).toString()
+                                .length());
+                        outStream.writeChars(ti.getMap().get(keyFind)
+                                .toString());
+                        outStream.close();
                     }
 
                 }
@@ -105,5 +104,4 @@ public class Writer {
         }
         return;
     }
-
 }

@@ -14,6 +14,8 @@ import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 import java.lang.IllegalArgumentException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,22 +25,22 @@ public class TableImplementTest {
 
     @Rule
     public TemporaryFolder tmp = new TemporaryFolder();
-    public TableProvider tp;
+    public TableProvider tableProvider;
     public String path;
-    public Table tb;
+    public Table table;
 
     @Before
     public void setUp() {
         TableProviderFactory tpv = new FactoryImplements();
-        path = tmp.newFolder("C:\\time").getAbsolutePath();
-        tp = tpv.create(path);
-        tb = tp.createTable("testing");
+        path = tmp.newFolder("time").getAbsolutePath();
+        tableProvider = tpv.create(path);
+        table = tableProvider.createTable("testing");
 
-        FactoryImplements tb = new FactoryImplements();
-        TableProviderImplements tp = (TableProviderImplements) tb
-                .create("C:\\DataBase");
-        Table time = tp.createTable("new");
-        time = tp.getTable("new");
+        FactoryImplements factory = new FactoryImplements();
+        TableProviderImplements tableProvider = (TableProviderImplements) factory
+                .create("test");
+        Table time = tableProvider.createTable("new");
+        time = tableProvider.getTable("new");
 
     }
 
@@ -47,8 +49,7 @@ public class TableImplementTest {
      */
     @Test
     public void testGetName() {
-        String result = tb.getName();
-        assertTrue("testing".equals(result));
+        assertTrue("testing".equals(table.getName()));
     }
 
     /**
@@ -56,30 +57,21 @@ public class TableImplementTest {
      */
     @Test
     public void testSizeByDefault() {
-        int result = tb.size();
-        assertEquals(0, result);
+        assertEquals(0, table.size());
     }
 
     @Test
     public void testSizeAfterAddedAndDel() {
-        tb.put("1", "11");
-        tb.put("2", "22");
-        int result = tb.size();
+        table.put("1", "11");
+        table.put("2", "22");
+        int result = table.size();
         assertEquals(2, result);
-        tb.remove("2");
-        result = tb.size();
+        table.remove("2");
+        result = table.size();
         assertEquals(1, result);
-        tb.remove("1");
-        result = tb.size();
+        table.remove("1");
+        result = table.size();
         assertEquals(0, result);
-    }
-
-    /**
-     * Test of get method
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGet() {
-        tb.get(null);
     }
 
     /**
@@ -88,25 +80,25 @@ public class TableImplementTest {
     @Test(expected = IllegalArgumentException.class)
     public void testPutIfKeyIsNull() {
         String value = "test_value";
-        tb.put(null, value);
+        table.put(null, value);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testPutIfValueIsNull() {
         String key = "test_key";
-        tb.put(key, null);
+        table.put(key, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testPutIfValueAndKeyIsNull() {
-        tb.put(null, null);
+        table.put(null, null);
     }
 
     @Test
     public void testPutIfKeyDnHaveInDataBase() {
         String key = "test_key";
         String value = "test_value";
-        assertNull(tb.put(key, value));
+        assertNull(table.put(key, value));
     }
 
     @Test
@@ -115,8 +107,8 @@ public class TableImplementTest {
         String valueOld = "test_value_old";
         String valueNew = "test_value_new";
 
-        assertNull(tb.put(key, valueOld));
-        assertEquals(valueOld, tb.put(key, valueNew));
+        assertNull(table.put(key, valueOld));
+        assertEquals(valueOld, table.put(key, valueNew));
     }
 
     /**
@@ -124,24 +116,30 @@ public class TableImplementTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testRemoveIfKeyNull() {
-        tb.remove(null);
+        table.remove(null);
     }
 
     @Test
     public void testRemoveIfKeyExist() {
         String key = "key_test";
         String value = "value_test";
-        tb.put(key, value);
+        table.put(key, value);
 
-        assertEquals(value, tb.remove(key));
-        assertNull(tb.get(key));
+        assertEquals(value, table.remove(key));
+        try {
+            assertNull(table.get(key));
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(TableImplementTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (KeyNullAndNotFound ex) {
+            Logger.getLogger(TableImplementTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
     public void testRemoveIfKeyDnExist() {
         String key = "key_test";
 
-        assertNull(tb.remove(key));
+        assertNull(table.remove(key));
     }
 
     /**
@@ -149,24 +147,33 @@ public class TableImplementTest {
      */
     @Test
     public void testCommitIfEmpty() {
-        assertEquals(0, tb.commit());
+        assertEquals(0, table.commit());
     }
 
     @Test
     public void testCommitIfFullAnything() {
-        tb.put("id564", "989");
-        tb.put("id988", "123");
-        tb.put("id123", "766");
-        assertEquals(3, tb.commit());
+        table.put("id564", "989");
+        table.put("id988", "123");
+        table.put("id123", "766");
+        assertEquals(3, table.commit());
     }
 
     public void testCommitIfWasRollback() {
-        tb.put("id564", "989");
-        tb.put("id988", "123");
-        tb.put("id123", "766");
-        tb.rollback();
+        table.put("id564", "989");
+        table.put("id988", "123");
+        table.put("id123", "766");
+        table.rollback();
 
-        assertEquals(0, tb.commit());
+        assertEquals(0, table.commit());
+    }
+    
+    public void testCommitAndCommit() {
+        table.put("id1", "1");
+        table.put("id2", "2");
+        table.put("id3", "3");
+        table.commit();
+        table.commit();
+        assertEquals(0, table.commit());
     }
 
     /**
@@ -174,29 +181,70 @@ public class TableImplementTest {
      */
     @Test
     public void testRollbackIfStateEmpty() {
-        assertEquals(0, tb.rollback());
+        assertEquals(0, table.rollback());
     }
 
     @Test(expected = NullPointerException.class)
     public void testRollbackNullPointer() {
-        tb.put("id564", "989");
-        tb.put("id988", "123");
-        tb.put("id123", "766");
-        tb.commit();
-        tb.rollback();
-
+        table.put("id564", "989");
+        table.put("id988", "123");
+        table.put("id123", "766");
+        table.commit();
+        table.rollback();
     }
 
     @Test
     public void testRollbackSomeChainChanges() {
-        tb.put("1", "1");
-        tb.put("2", "2");
-        tb.put("3", "3");
-        tb.commit();
-        tb.put("4", "4");
-        tb.put("54", "54");
-        tb.commit();
-        assertEquals(2, tb.rollback());
+        table.put("1", "1");
+        table.put("2", "2");
+        table.put("3", "3");
+        table.commit();
+        table.put("4", "4");
+        table.put("54", "54");
+        table.commit();
+        assertEquals(2, table.rollback());
+    }
+    
+     @Test
+    public void testCommitCheckRollbackCheck() throws IllegalArgumentException, KeyNullAndNotFound {
+        table.put("1", "11");
+        table.put("2", "22");
+        table.put("3", "33");
+        table.commit();
+        assertEquals("11", table.get("1"));
+        assertEquals("22", table.get("2"));
+        assertEquals("33", table.get("3"));
+        table.put("4", "44");
+        table.put("5", "55");
+        table.commit();
+        assertEquals("44", table.get("4"));
+        assertEquals("55", table.get("5"));
+        table.rollback();
+        assertEquals(null, table.get("4"));
+        assertEquals(null, table.get("5"));
+        assertEquals("33", table.get("3"));
+        assertEquals(3, table.size());
+
+    }
+
+     @Test
+    public void testCommitCheckChangesRollbackCheck() throws IllegalArgumentException, KeyNullAndNotFound {
+        table.put("1", "11");
+        table.put("2", "22");
+        table.put("3", "33");
+        table.commit();
+        assertEquals("11", table.get("1"));
+        assertEquals("22", table.get("2"));
+        assertEquals("33", table.get("3"));
+        table.put("4", "44");
+        table.put("5", "55");
+        assertEquals("11", table.remove("1"));
+        assertEquals("22", table.remove("2"));
+        assertEquals(null, table.remove("66"));
+        table.commit();
+        table.rollback();
+        assertEquals("11", table.get("1"));
+        assertEquals(3, table.size());
 
     }
 
