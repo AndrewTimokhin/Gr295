@@ -69,18 +69,20 @@ public class Reader {
                                                     dataBase.put(
                                                             keyBuilder.toString(),
                                                             valueBuilder.toString());
-                                                    dataBase.getBackup().put(keyBuilder.toString(), valueBuilder.toString());
+                                                    dataBase.getBackup().put(
+                                                            keyBuilder.toString(),
+                                                            valueBuilder.toString());
                                                     keyBuilder.replace(0,
                                                             keyBuilder.length(), "");
                                                     valueBuilder.replace(0,
-                                                            valueBuilder.length(), "");
+                                                          valueBuilder.length(), "");
                                                 } catch (EOFException e) {
                                                     rd.close();
                                                     break;
                                                 }
 
                                             }
-                                        } catch (FileNotFoundException exceptionFileNotFound) {
+                                 } catch (FileNotFoundException exceptionFileNotFound) {
                                             throw new RuntimeException(
                                                     exceptionFileNotFound);
                                         }

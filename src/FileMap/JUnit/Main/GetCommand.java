@@ -6,7 +6,6 @@
 package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit.Main;
 
 import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit.Interpretator.Commands;
-import java.util.logging.Logger;
 import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.KeyNullAndNotFound;
 import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.TableProviderImplements;
 

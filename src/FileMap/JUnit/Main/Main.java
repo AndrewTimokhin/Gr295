@@ -13,9 +13,11 @@ public class Main {
             IllegalArgumentException, KeyNullAndNotFound, UnknownCommand {
         InteractiveMode user = new InteractiveMode("C:\\DataBase", new Commands());
         Scanner sc = new Scanner(System.in);
-
+        System.out.print("$ ");
         try {
-            while (user.command(sc.nextLine()));
+            while (user.command(sc.nextLine())) {
+                System.out.print("$ ");
+            };
             /*
              * FactoryImplements tb = new FactoryImplements();
              * TableProviderImplements tp = (TableProviderImplements) tb
@@ -65,6 +67,7 @@ public class Main {
              * System.out.println(e); } System.out.println(tableA2.get("4"));
              */
         } catch (UnknownCommand ex) {
+            System.out.println("Unknow operation.  Fail");
         }
     }
 }

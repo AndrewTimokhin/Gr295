@@ -27,10 +27,9 @@ import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit.Main.UseCommand;
  */
 public class Commands {
 
-    private Map<String, Commands> TotalCommands;
-
     int digital;
     public static TableImplement currentTable;
+    private Map<String, Commands> totalCommands;
 
     public Commands(int digital) {
         this.digital = digital;
@@ -41,19 +40,19 @@ public class Commands {
     }
 
     public Map<String, Commands> getAllCommand() {
-        TotalCommands = new HashMap<>();
-        TotalCommands.put("create", new CreateCommand());
-        TotalCommands.put("put", new PutCommand());
-        TotalCommands.put("get", new GetCommand());
-        TotalCommands.put("remove", new RemoveCommand());
-        TotalCommands.put("drop", new DropCommand());
-        TotalCommands.put("commit", new CommitCommand());
-        TotalCommands.put("rollback", new RollbackCommand());
-        TotalCommands.put("use", new UseCommand());
-        TotalCommands.put("size", new SizeCommand());
-        TotalCommands.put("list", new ListCommand());
-        TotalCommands.put("exit", new ExitCommand());
-        return TotalCommands;
+        totalCommands = new HashMap<>();
+        totalCommands.put("create", new CreateCommand());
+        totalCommands.put("put", new PutCommand());
+        totalCommands.put("get", new GetCommand());
+        totalCommands.put("remove", new RemoveCommand());
+        totalCommands.put("drop", new DropCommand());
+        totalCommands.put("commit", new CommitCommand());
+        totalCommands.put("rollback", new RollbackCommand());
+        totalCommands.put("use", new UseCommand());
+        totalCommands.put("size", new SizeCommand());
+        totalCommands.put("list", new ListCommand());
+        totalCommands.put("exit", new ExitCommand());
+        return totalCommands;
     }
 
     public boolean checkAndRun(String[] command, TableProviderImplements table) {
