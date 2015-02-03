@@ -5,10 +5,10 @@
  */
 package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 
-import org.junit.After;
-import org.junit.AfterClass;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.FactoryImplements;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.TableProvider;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.TableProviderFactory;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
@@ -19,6 +19,7 @@ import org.junit.rules.TemporaryFolder;
  * @author Андрей
  */
 public class TableProviderImplementsTest {
+
     @Rule
     public TemporaryFolder tmp = new TemporaryFolder();
     public TableProvider tp;
@@ -32,7 +33,6 @@ public class TableProviderImplementsTest {
     /**
      * Следующие тесты полностью тестируют реализацию интерфейса
      */
-
     /**
      * Тесты getTable метода
      */
@@ -56,7 +56,6 @@ public class TableProviderImplementsTest {
     /**
      * Тесты createTable метода
      */
-
     @Test(expected = IllegalArgumentException.class)
     public void testCreateTable() {
         tp.createTable(null);

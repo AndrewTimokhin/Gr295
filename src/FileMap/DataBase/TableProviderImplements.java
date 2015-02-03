@@ -1,42 +1,45 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
+package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Timokhin Andrew
  */
-
 public class TableProviderImplements implements TableProvider {
+
+    private Map<String, TableImplement> collection;
+    private final String dir;
+
+    TableProviderImplements(String dir) throws IOException {
+        this.dir = dir;
+        collection = new HashMap<String, TableImplement>();
+        Reader rd = new Reader(new String(this.dir));
+        rd.read(this);
+    }
+
+    public Set<String> getAvailableTables() {
+        return collection.keySet();
+    }
 
     public static void deleteDir(File dir) {
         if (dir.isDirectory()) {
             String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                File f = new File(dir, children[i]);
-                deleteDir(f);
+            for (String childName : children) {
+                deleteDir(new File(dir, childName));
             }
             dir.delete();
-        } else
+        } else {
             dir.delete();
+        }
     }
 
-    protected Map<String, TableImplement> collection;
-    public final String dir;
-
-    TableProviderImplements(String dir) throws IOException {
-        this.dir = dir;
-        collection = new HashMap<>();
-        Reader rd = new Reader();
-        rd.read(this);
-    }
-
-    public void write() throws IOException {
+    public void write() throws IOException, KeyNullAndNotFound {
         Writer writeToFileSystem = new Writer();
         writeToFileSystem.write(this);
     }
@@ -45,11 +48,10 @@ public class TableProviderImplements implements TableProvider {
     public Table getTable(String name) throws IllegalArgumentException {
         if (name == null) {
             throw new IllegalArgumentException(
-                    "Info: Name of DataBase is null. Please, enter correct name");
+                    "Name of DataBase is null");
         }
-        if (collection != null) { // if database is created now
-            if (collection.containsKey(name))
-                return collection.get(name);
+        if (collection.containsKey(name)) {
+            return collection.get(name);
         }
         return null;
     }
@@ -58,15 +60,14 @@ public class TableProviderImplements implements TableProvider {
     public Table createTable(String name) throws IllegalArgumentException {
         if (name == null) {
             throw new IllegalArgumentException(
-                    "Info: Name of DataBase is null. Please, enter correct name");
+                    "Name of DataBase is null. Please, enter correct name");
         }
         if (collection != null) {
-            if (collection.containsKey(name))
+            if (collection.containsKey(name)) {
                 return null;
-            {
-                collection.put(name, new TableImplement(name, dir));
-                return collection.get(name);
             }
+            collection.put(name, new TableImplement(name, dir));
+            return collection.get(name);
         }
         if (collection == null) {
             collection = new HashMap<>();
@@ -81,13 +82,13 @@ public class TableProviderImplements implements TableProvider {
             IllegalStateException {
         if (name == null) {
             throw new IllegalArgumentException(
-                    "Info: Name of DataBase is null. Please, enter correct name");
+                    "Name of DataBase is null. Please, enter correct name");
         }
         if (collection != null) {
             if (collection.containsKey(name)) {
                 Path path = Paths.get(
                         collection.get(name).getPath().toString(), collection
-                                .get(name).getName());
+                        .get(name).getName());
                 File file = new File(path.toString());
                 this.deleteDir(file);
                 collection.remove(name);
@@ -95,5 +96,17 @@ public class TableProviderImplements implements TableProvider {
             }
         }
         throw new IllegalStateException("Requested database don't exist");
+    }
+
+    public int size() {
+        int size = 0;
+        for (String nameTable : collection.keySet()) {
+            size += collection.get(nameTable).size();
+        }
+        return size;
+    }
+
+    public String getDir() {
+        return dir;
     }
 }

@@ -1,4 +1,4 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
+package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase;
 
 import java.io.IOException;
 
@@ -9,20 +9,18 @@ import java.io.IOException;
  *
  * @author Timokhin Andrew
  */
-
 public class FactoryImplements implements TableProviderFactory {
 
     @Override
     public TableProvider create(String dir) {
         if (dir == null) {
             throw new IllegalArgumentException(
-                    "Info: String representing directory is null");
+                    "String representing directory is null");
         }
         try {
             return new TableProviderImplements(dir);
-        } catch (IOException xcpt) {
-            throw new RuntimeException(
-                    "Info: Target directory cannot be created or you don't have access to creating files! Try to run as administrator");
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
         }
     }
 }

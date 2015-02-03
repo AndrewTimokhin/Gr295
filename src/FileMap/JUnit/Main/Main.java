@@ -1,14 +1,17 @@
-package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
+package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit.Main;
 
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit.Interpretator.InteractiveMode;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.KeyNullAndNotFound;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit.Interpretator.Commands;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit.Interpretator.UnknownCommand;
 
-public class JUnit {
+public class Main {
+
     public static void main(String[] args) throws IOException,
-            IllegalArgumentException, KeyNullAndNotFound {
-        InteractiveMode user = new InteractiveMode("C:\\DataBase");
+            IllegalArgumentException, KeyNullAndNotFound, UnknownCommand {
+        InteractiveMode user = new InteractiveMode("C:\\DataBase", new Commands());
         Scanner sc = new Scanner(System.in);
 
         try {

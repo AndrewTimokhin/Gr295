@@ -4,16 +4,17 @@
  */
 package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit;
 
-import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.KeyNullAndNotFound;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.FactoryImplements;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.TableProvider;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.Table;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.TableProviderImplements;
+import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.TableProviderFactory;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
-import java.lang.IllegalArgumentException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,9 +32,9 @@ public class TableImplementTest {
 
     @Before
     public void setUp() {
-        TableProviderFactory tpv = new FactoryImplements();
+        TableProviderFactory tableProviderFactory = new FactoryImplements();
         path = tmp.newFolder("time").getAbsolutePath();
-        tableProvider = tpv.create(path);
+        tableProvider = tableProviderFactory.create(path);
         table = tableProvider.createTable("testing");
 
         FactoryImplements factory = new FactoryImplements();
@@ -166,7 +167,7 @@ public class TableImplementTest {
 
         assertEquals(0, table.commit());
     }
-    
+
     public void testCommitAndCommit() {
         table.put("id1", "1");
         table.put("id2", "2");
@@ -184,13 +185,14 @@ public class TableImplementTest {
         assertEquals(0, table.rollback());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test()
     public void testRollbackNullPointer() {
         table.put("id564", "989");
         table.put("id988", "123");
         table.put("id123", "766");
         table.commit();
         table.rollback();
+        assertEquals(0, table.size());
     }
 
     @Test
@@ -204,8 +206,8 @@ public class TableImplementTest {
         table.commit();
         assertEquals(2, table.rollback());
     }
-    
-     @Test
+
+    @Test
     public void testCommitCheckRollbackCheck() throws IllegalArgumentException, KeyNullAndNotFound {
         table.put("1", "11");
         table.put("2", "22");
@@ -227,7 +229,7 @@ public class TableImplementTest {
 
     }
 
-     @Test
+    @Test
     public void testCommitCheckChangesRollbackCheck() throws IllegalArgumentException, KeyNullAndNotFound {
         table.put("1", "11");
         table.put("2", "22");
@@ -248,4 +250,13 @@ public class TableImplementTest {
 
     }
 
+    @Test
+    public void extraCheck() throws IllegalArgumentException, KeyNullAndNotFound {
+        table.put("a", "b");
+        table.commit();
+        table.put("a", "c");
+        table.rollback();
+        assertEquals(null, table.get("a"));
+
+    }
 }
