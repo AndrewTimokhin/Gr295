@@ -18,8 +18,8 @@ import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.TableProviderImpl
  */
 public class InteractiveMode {
     
-    final private TableProviderImplements provider;
-    final private FactoryImplements factory;
+    private final TableProviderImplements provider;
+    private final FactoryImplements factory;
     private TableImplement table;
     private String currentDir;
     private Map<String, Commands> allCommand;
