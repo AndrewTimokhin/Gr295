@@ -17,10 +17,10 @@ import ru.fizteh.fivt.students.AndrewTimokhin.FileMap.DataBase.TableProviderImpl
  *
  */
 public class InteractiveMode {
-
-    private TableImplement table;
+    
     final private TableProviderImplements provider;
     final private FactoryImplements factory;
+    private TableImplement table;
     private String currentDir;
     private Map<String, Commands> allCommand;
 
