@@ -9,9 +9,9 @@ package ru.fizteh.fivt.students.AndrewTimokhin.FileMap.JUnit.Interpretator;
  *
  * @author Андрей
  */
-public class UnknownCommand extends Exception {
+public class UnknownCommandException extends Exception {
 
-    public UnknownCommand(String description) {
+    public UnknownCommandException(String description) {
         super(description);
     }
 
